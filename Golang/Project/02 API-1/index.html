@@ -1,0 +1,1195 @@
+
+
+
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="ja">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
+      
+      <link rel="shortcut icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+    
+    
+      
+        <title>go-gin-example 02：API-1 - kingCheung</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/application.1b62728e.css">
+      
+      
+    
+    
+      <script src="../../../assets/javascripts/modernizr.268332fc.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#go-gin-example-02api-1" tabindex="1" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="../../.." title="kingCheung" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              kingCheung
+            </span>
+            <span class="md-header-nav__topic">
+              
+                go-gin-example 02：API-1
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="../../.." title="kingCheung" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    kingCheung
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-1" type="checkbox" id="nav-1" checked>
+    
+    <label class="md-nav__link" for="nav-1">
+      Golang
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-1">
+        Golang
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-1-1" type="checkbox" id="nav-1-1">
+    
+    <label class="md-nav__link" for="nav-1-1">
+      Basic
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-1-1">
+        Basic
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Basic/channel/" title="channel" class="md-nav__link">
+      channel
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-1-2" type="checkbox" id="nav-1-2" checked>
+    
+    <label class="md-nav__link" for="nav-1-2">
+      Project
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-1-2">
+        Project
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../01 Config/" title="go-gin-example 01：配置" class="md-nav__link">
+      go-gin-example 01：配置
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        go-gin-example 02：API-1
+      </label>
+    
+    <a href="./" title="go-gin-example 02：API-1" class="md-nav__link md-nav__link--active">
+      go-gin-example 02：API-1
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    项目目录
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#go-modules-replace" class="md-nav__link">
+    添加Go Modules Replace配置本地模块路径 （好像不必要）
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ini" class="md-nav__link">
+    使用ini配置文件库/编写项目配置包
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    应用配置文件
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setting" class="md-nav__link">
+    调用配置的setting模块
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api" class="md-nav__link">
+    API错误码包
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    工具包
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    数据库模型映射
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#demo" class="md-nav__link">
+    Demo
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#maingo" class="md-nav__link">
+    从main.go中分离路由
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    当前目录结构
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../03 API-2/" title="go-gin-example 03：API-2" class="md-nav__link">
+      go-gin-example 03：API-2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../04 API-3/" title="go-gin-example 04：API-3" class="md-nav__link">
+      go-gin-example 04：API-3
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../05 JWT/" title="go-gin-example 05：JWT" class="md-nav__link">
+      go-gin-example 05：JWT
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../08 Swagger/" title="go-gin-example 08： Swagger" class="md-nav__link">
+      go-gin-example 08： Swagger
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../09 Docker/" title="go-gin-example 09：Docker" class="md-nav__link">
+      go-gin-example 09：Docker
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../10 GORM-Callback/" title="go-gin-example 10： GORM-Callback" class="md-nav__link">
+      go-gin-example 10： GORM-Callback
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../FlowChart/" title="流程图" class="md-nav__link">
+      流程图
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../InterfaceTestInstance/" title="接口测试实例" class="md-nav__link">
+      接口测试实例
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Linux
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Linux
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Linux/formattingUdisk/" title="Linux01: 彻底格式化U盘" class="md-nav__link">
+      Linux01: 彻底格式化U盘
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Linux/changeSources/" title="Linux02: 更改Ubuntu源" class="md-nav__link">
+      Linux02: 更改Ubuntu源
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    项目目录
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#go-modules-replace" class="md-nav__link">
+    添加Go Modules Replace配置本地模块路径 （好像不必要）
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ini" class="md-nav__link">
+    使用ini配置文件库/编写项目配置包
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    应用配置文件
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#setting" class="md-nav__link">
+    调用配置的setting模块
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#api" class="md-nav__link">
+    API错误码包
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    工具包
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    数据库模型映射
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#demo" class="md-nav__link">
+    Demo
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#maingo" class="md-nav__link">
+    从main.go中分离路由
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    当前目录结构
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="go-gin-example-02api-1">go-gin-example 02：API-1</h1>
+<ul>
+<li>初始设置</li>
+</ul>
+<h2 id="_1">项目目录</h2>
+<div class="highlight"><pre><span></span>go-gin-example/
+├─conf
+├─middleware
+├─models
+├─pkg
+├─routers
+└─runtime
+</pre></div>
+
+<ul>
+<li>conf：用于存储配置文件</li>
+<li>middleware：应用中间件</li>
+<li>models：应用数据库模型</li>
+<li>pkg：第三方包</li>
+<li>routers：路由逻辑处理</li>
+<li>runtime：应用运行时数据</li>
+</ul>
+<h2 id="go-modules-replace">添加Go Modules Replace配置本地模块路径 （好像不必要）</h2>
+<div class="highlight"><pre><span></span>module go-gin-example
+
+go 1.12
+
+require (···)
+
+replace (
+    ./go-gin-example/conf =&gt; ./go-gin-example/pkg/conf
+    ./go-gin-example/middleware =&gt; ./go-gin-example/middleware
+    ./go-gin-example/models =&gt; ./go-gin-example/models
+    ./go-gin-example/pkg/e =&gt; ./go-gin-example/pkg/e
+    ./go-gin-example/pkg/setting =&gt; ./go-gin-example/pkg/setting
+    ./go-gin-example/pkg/util =&gt; ./go-gin-example/pkg/util
+    ./go-gin-example/routers =&gt; ./go-gin-example/routers
+)
+# 用 replace 将其指定读取本地的模块路径，这样子就可以解决本地模块读取的问题
+</pre></div>
+
+<h2 id="ini">使用ini配置文件库/编写项目配置包</h2>
+<h3 id="_2">应用配置文件</h3>
+<blockquote>
+<p>将公共配置部分提取出来，写成专门的配置文件，统一写数据库环境、服务器环境等。</p>
+</blockquote>
+<ul>
+<li>
+<p>在<code>./conf</code>目录下新建<code>app.ini</code>文件</p>
+</li>
+<li>
+<p>定义RUN_MODE</p>
+</li>
+<li>
+<p>定义数据库端口、账号、表格等</p>
+</li>
+<li>定义公共参数：分页</li>
+<li>定义服务器端口、TIMEOUT时间等</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="c1"># debug or release</span>
+<span class="na">RUN_MODE</span> <span class="o">=</span> <span class="s">debug</span>
+
+<span class="k">[app]</span>
+<span class="na">PAGE_SIZE</span> <span class="o">=</span> <span class="s">10</span>
+<span class="na">JWT_SECRET</span> <span class="o">=</span> <span class="s">23347$040412</span>
+
+<span class="k">[server]</span>
+<span class="na">HTTP_PORT</span> <span class="o">=</span> <span class="s">8000</span>
+<span class="na">READ_TIMEOUT</span> <span class="o">=</span> <span class="s">60</span>
+<span class="na">WRITE_TIMEOUT</span> <span class="o">=</span> <span class="s">60</span>
+
+<span class="k">[database]</span>
+<span class="na">TYPE</span> <span class="o">=</span> <span class="s">mysql</span>
+<span class="na">USER</span> <span class="o">=</span> <span class="s">root # 数据库账号</span>
+<span class="na">PASSWORD</span> <span class="o">=</span> <span class="s">root # 数据库密码</span>
+<span class="na">HOST</span> <span class="o">=</span> <span class="s">127.0.0.1:3306 # 数据库IP:数据库端口号</span>
+<span class="na">NAME</span> <span class="o">=</span> <span class="s">blog</span>
+<span class="na">TABLE_PREFIX</span> <span class="o">=</span> <span class="s">blog_</span>
+</pre></div>
+
+<h3 id="setting">调用配置的setting模块</h3>
+<blockquote>
+<p>负责调用app.ini</p>
+</blockquote>
+<ul>
+<li><code>go get -u github.com/go-ini/ini</code></li>
+<li>在<code>./pkg/setting</code>目录下新建<code>setting.go</code>文件</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nx">setting</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+    <span class="s">&quot;log&quot;</span>
+    <span class="s">&quot;time&quot;</span>
+
+    <span class="s">&quot;github.com/go-ini/ini&quot;</span>
+<span class="p">)</span>
+
+<span class="kd">var</span> <span class="p">(</span>
+    <span class="nx">Cfg</span> <span class="o">*</span><span class="nx">ini</span><span class="p">.</span><span class="nx">File</span> <span class="c1">// Cfg为ini文件类型</span>
+
+       <span class="c1">// 声明app.ini文件写好的各种配置的类型</span>
+    <span class="nx">RunMode</span> <span class="kt">string</span>  
+
+    <span class="nx">HTTPPort</span>     <span class="kt">int</span>
+    <span class="nx">ReadTimeout</span>  <span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span>
+    <span class="nx">WriteTimeout</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span>
+
+    <span class="nx">PageSize</span>  <span class="kt">int</span>
+    <span class="nx">JwtSecret</span> <span class="kt">string</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nx">init</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">err</span> <span class="kt">error</span>
+    <span class="c1">// 加载初始化文件</span>
+    <span class="nx">Cfg</span><span class="p">,</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">ini</span><span class="p">.</span><span class="nx">Load</span><span class="p">(</span><span class="s">&quot;conf/app.ini&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="nx">log</span><span class="p">.</span><span class="nx">Fatalf</span><span class="p">(</span><span class="s">&quot;Fail to parse &#39;conf/app.ini`: %v&quot;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="nx">LoadBase</span><span class="p">()</span>
+    <span class="nx">LoadServer</span><span class="p">()</span>
+    <span class="nx">LoadApp</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="c1">// 加载基础设置</span>
+<span class="kd">func</span> <span class="nx">LoadBase</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 设置RUN_MODE为&#39;debug&#39;</span>
+    <span class="nx">RunMode</span> <span class="p">=</span> <span class="nx">Cfg</span><span class="p">.</span><span class="nx">Section</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">).</span><span class="nx">Key</span><span class="p">(</span><span class="s">&quot;RUN_MODE&quot;</span><span class="p">).</span><span class="nx">MustString</span><span class="p">(</span><span class="s">&quot;debug&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// LoadServer 加载服务器配置</span>
+<span class="kd">func</span> <span class="nx">LoadServer</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 获取&#39;server&#39;的section信息</span>
+    <span class="c1">// 这里的section包含&#39;server&#39;的各种信息, 由./config/app,ini配置文件提供</span>
+    <span class="nx">sec</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">Cfg</span><span class="p">.</span><span class="nx">GetSection</span><span class="p">(</span><span class="s">&quot;server&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="nx">log</span><span class="p">.</span><span class="nx">Fatalf</span><span class="p">(</span><span class="s">&quot;Fail to get section &#39;server&#39;:%v&quot;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="nx">RunMode</span> <span class="p">=</span> <span class="nx">Cfg</span><span class="p">.</span><span class="nx">Section</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">).</span><span class="nx">Key</span><span class="p">(</span><span class="s">&quot;RUN_MODE&quot;</span><span class="p">).</span><span class="nx">MustString</span><span class="p">(</span><span class="s">&quot;debug&quot;</span><span class="p">)</span>
+    <span class="c1">// 自动类型转换</span>
+    <span class="nx">HTTPPort</span> <span class="p">=</span> <span class="nx">sec</span><span class="p">.</span><span class="nx">Key</span><span class="p">(</span><span class="s">&quot;HTTP_PORT&quot;</span><span class="p">).</span><span class="nx">MustInt</span><span class="p">(</span><span class="mi">8000</span><span class="p">)</span>
+    <span class="nx">ReadTimeout</span> <span class="p">=</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span><span class="p">(</span><span class="nx">sec</span><span class="p">.</span><span class="nx">Key</span><span class="p">(</span><span class="s">&quot;READ_TIMEOUT&quot;</span><span class="p">).</span><span class="nx">MustInt</span><span class="p">(</span><span class="mi">60</span><span class="p">))</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span>
+    <span class="nx">WriteTimeout</span> <span class="p">=</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Duration</span><span class="p">(</span><span class="nx">sec</span><span class="p">.</span><span class="nx">Key</span><span class="p">(</span><span class="s">&quot;WRITE_TIMEOUT&quot;</span><span class="p">).</span><span class="nx">MustInt</span><span class="p">(</span><span class="mi">60</span><span class="p">))</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span>
+<span class="p">}</span>
+
+<span class="c1">// LoadApp 加载APP配置</span>
+<span class="kd">func</span> <span class="nx">LoadApp</span><span class="p">()</span> <span class="p">{</span>
+    <span class="c1">// 获取./config/app.ini配置文件的APP配置</span>
+    <span class="nx">sec</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">Cfg</span><span class="p">.</span><span class="nx">GetSection</span><span class="p">(</span><span class="s">&quot;app&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="nx">log</span><span class="p">.</span><span class="nx">Fatalf</span><span class="p">(</span><span class="s">&quot;Fail to get section &#39;app&#39;:%v&quot;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="nx">JwtSecret</span> <span class="p">=</span> <span class="nx">sec</span><span class="p">.</span><span class="nx">Key</span><span class="p">(</span><span class="s">&quot;JWT_SECRET&quot;</span><span class="p">).</span><span class="nx">MustString</span><span class="p">(</span><span class="s">&quot;!@)*#)!@U#@*!@!)&quot;</span><span class="p">)</span>
+    <span class="nx">PageSize</span> <span class="p">=</span> <span class="nx">sec</span><span class="p">.</span><span class="nx">Key</span><span class="p">(</span><span class="s">&quot;PAGE_SIZE&quot;</span><span class="p">).</span><span class="nx">MustInt</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+
+<h3 id="api">API错误码包</h3>
+<blockquote>
+<p>建立错误码e模块</p>
+</blockquote>
+<ul>
+<li>
+<p>在<code>./pkg/e</code>目录下新建<code>code.go</code>和<code>msg.go</code>文件</p>
+</li>
+<li>
+<p>code.go</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nx">e</span> 
+
+<span class="c1">// API错误代码</span>
+<span class="kd">const</span> <span class="p">(</span>
+    <span class="nx">SUCCESS</span>        <span class="p">=</span> <span class="mi">200</span>
+    <span class="nx">ERROR</span>          <span class="p">=</span> <span class="mi">500</span>
+    <span class="nx">INVALID_PARAMS</span> <span class="p">=</span> <span class="mi">400</span>
+
+    <span class="nx">ERROR_EXIST_TAG</span>         <span class="p">=</span> <span class="mi">10001</span>
+    <span class="nx">ERROR_NOT_EXIST_TAG</span>     <span class="p">=</span> <span class="mi">10002</span>
+    <span class="nx">ERROR_NOT_EXIST_ARTICLE</span> <span class="p">=</span> <span class="mi">10003</span>
+
+    <span class="nx">ERROR_AUTH_CHECK_TOKEN_FAIL</span>    <span class="p">=</span> <span class="mi">20001</span>
+    <span class="nx">ERROR_AUTH_CHECK_TOKEN_TIMEOUT</span> <span class="p">=</span> <span class="mi">20002</span>
+    <span class="nx">ERROR_AUTH_TOKEN</span>               <span class="p">=</span> <span class="mi">20003</span>
+    <span class="nx">ERROR_AUTH</span>                     <span class="p">=</span> <span class="mi">20004</span>
+<span class="p">)</span>
+</pre></div>
+
+<ul>
+<li>msg.go</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nx">e</span>
+<span class="c1">//msg.go</span>
+
+<span class="c1">// MsgFlags 错误信息</span>
+<span class="kd">var</span> <span class="nx">MsgFlags</span> <span class="p">=</span> <span class="kd">map</span><span class="p">[</span><span class="kt">int</span><span class="p">]</span><span class="kt">string</span><span class="p">{</span>
+    <span class="nx">SUCCESS</span><span class="p">:</span>                        <span class="s">&quot;ok&quot;</span><span class="p">,</span>
+    <span class="nx">ERROR</span><span class="p">:</span>                          <span class="s">&quot;fail&quot;</span><span class="p">,</span>
+    <span class="nx">INVALID_PARAMS</span><span class="p">:</span>                 <span class="s">&quot;请求参数错误&quot;</span><span class="p">,</span>
+    <span class="nx">ERROR_EXIST_TAG</span><span class="p">:</span>                <span class="s">&quot;已存在该标签名称&quot;</span><span class="p">,</span>
+    <span class="nx">ERROR_NOT_EXIST_TAG</span><span class="p">:</span>            <span class="s">&quot;该标签不存在&quot;</span><span class="p">,</span>
+    <span class="nx">ERROR_NOT_EXIST_ARTICLE</span><span class="p">:</span>        <span class="s">&quot;该文章不存在&quot;</span><span class="p">,</span>
+    <span class="nx">ERROR_AUTH_CHECK_TOKEN_FAIL</span><span class="p">:</span>    <span class="s">&quot;Token鉴权失败&quot;</span><span class="p">,</span>
+    <span class="nx">ERROR_AUTH_CHECK_TOKEN_TIMEOUT</span><span class="p">:</span> <span class="s">&quot;Token鉴权超时&quot;</span><span class="p">,</span>
+    <span class="nx">ERROR_AUTH_TOKEN</span><span class="p">:</span>               <span class="s">&quot;Token生成失败&quot;</span><span class="p">,</span>
+    <span class="nx">ERROR_AUTH</span><span class="p">:</span>                     <span class="s">&quot;Token错误&quot;</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="c1">// GetMsg 获取错误信息</span>
+<span class="kd">func</span> <span class="nx">GetMsg</span><span class="p">(</span><span class="nx">code</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
+    <span class="nx">msg</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">MsgFlags</span><span class="p">[</span><span class="nx">code</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nx">ok</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">msg</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">MsgFlags</span><span class="p">[</span><span class="nx">ERROR</span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+
+<h3 id="_3">工具包</h3>
+<blockquote>
+<p>公共方法：例如获取分页页码等</p>
+</blockquote>
+<ul>
+<li><code>go get -u github.com/unknwon/com</code></li>
+<li>在<code>./pkg/util</code>目录下新建<code>pagination.go</code>文件</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nx">util</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+    <span class="nx">setting</span> <span class="s">&quot;go-gin-example/pkg/settings&quot;</span>
+
+    <span class="s">&quot;github.com/gin-gonic/gin&quot;</span>
+    <span class="s">&quot;github.com/unknwon/com&quot;</span>
+<span class="p">)</span>
+
+<span class="c1">// GetPage 获取page数量</span>
+<span class="kd">func</span> <span class="nx">GetPage</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="kt">int</span> <span class="p">{</span>
+    <span class="nx">result</span> <span class="o">:=</span> <span class="mi">0</span>
+    <span class="c1">// page转换为int</span>
+    <span class="nx">page</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">com</span><span class="p">.</span><span class="nx">StrTo</span><span class="p">(</span><span class="nx">c</span><span class="p">.</span><span class="nx">Query</span><span class="p">(</span><span class="s">&quot;page&quot;</span><span class="p">)).</span><span class="nx">Int</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nx">page</span> <span class="p">&gt;</span> <span class="mi">0</span> <span class="p">{</span>
+        <span class="nx">result</span> <span class="p">=</span> <span class="p">(</span><span class="nx">page</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="nx">setting</span><span class="p">.</span><span class="nx">PageSize</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="nx">result</span>
+<span class="p">}</span>
+</pre></div>
+
+<h3 id="_4">数据库模型映射</h3>
+<blockquote>
+<p>通过gorm将golang结构体映射到数据库中自动生成模型</p>
+</blockquote>
+<ul>
+<li><code>go get -u github.com/jinzhu/gorm</code></li>
+<li><code>go get -u github.com/go-sql-driver/mysql</code></li>
+<li>在<code>./models</code>目录下新建<code>models.go</code>文件。</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nx">models</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+    <span class="s">&quot;fmt&quot;</span>
+    <span class="nx">setting</span> <span class="s">&quot;go-gin-example/pkg/settings&quot;</span>
+    <span class="s">&quot;log&quot;</span>
+
+    <span class="s">&quot;github.com/jinzhu/gorm&quot;</span>
+<span class="p">)</span>
+
+<span class="kd">var</span> <span class="nx">db</span> <span class="o">*</span><span class="nx">gorm</span><span class="p">.</span><span class="nx">DB</span>
+
+<span class="c1">// Model 数据库模型</span>
+<span class="kd">type</span> <span class="nx">Model</span> <span class="kd">struct</span> <span class="p">{</span>
+    <span class="nx">ID</span>         <span class="kt">int</span> <span class="s">`gorm:&quot;primary_key&quot; json:id`</span>
+    <span class="nx">CreatedOn</span>  <span class="kt">int</span> <span class="s">`json:&quot;created_on&quot;`</span>
+    <span class="nx">ModifiedOn</span> <span class="kt">int</span> <span class="s">`json:&quot;modified_on&quot;`</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nx">init</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="p">(</span>
+        <span class="nx">err</span>                                               <span class="kt">error</span>
+        <span class="nx">dbType</span><span class="p">,</span> <span class="nx">dbName</span><span class="p">,</span> <span class="nx">user</span><span class="p">,</span> <span class="nx">password</span><span class="p">,</span> <span class="nx">host</span><span class="p">,</span> <span class="nx">tablePrefix</span> <span class="kt">string</span>
+    <span class="p">)</span>
+    <span class="c1">// 获取配置文件的数据库配置</span>
+    <span class="nx">sec</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">setting</span><span class="p">.</span><span class="nx">Cfg</span><span class="p">.</span><span class="nx">GetSection</span><span class="p">(</span><span class="s">&quot;database&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="s">&quot;Fail to get get scetion `database`:%v&quot;</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="nx">dbType</span> <span class="p">=</span> <span class="nx">sec</span><span class="p">.</span><span class="nx">Key</span><span class="p">(</span><span class="s">&quot;TYPE&quot;</span><span class="p">).</span><span class="nx">String</span><span class="p">()</span>
+    <span class="nx">dbName</span> <span class="p">=</span> <span class="nx">sec</span><span class="p">.</span><span class="nx">Key</span><span class="p">(</span><span class="s">&quot;NAME&quot;</span><span class="p">).</span><span class="nx">String</span><span class="p">()</span>
+    <span class="nx">user</span> <span class="p">=</span> <span class="nx">sec</span><span class="p">.</span><span class="nx">Key</span><span class="p">(</span><span class="s">&quot;USER&quot;</span><span class="p">).</span><span class="nx">String</span><span class="p">()</span>
+    <span class="nx">password</span> <span class="p">=</span> <span class="nx">sec</span><span class="p">.</span><span class="nx">Key</span><span class="p">(</span><span class="s">&quot;PASSWORD&quot;</span><span class="p">).</span><span class="nx">String</span><span class="p">()</span>
+    <span class="nx">host</span> <span class="p">=</span> <span class="nx">sec</span><span class="p">.</span><span class="nx">Key</span><span class="p">(</span><span class="s">&quot;HOST&quot;</span><span class="p">).</span><span class="nx">String</span><span class="p">()</span>
+    <span class="nx">tablePrefix</span> <span class="p">=</span> <span class="nx">sec</span><span class="p">.</span><span class="nx">Key</span><span class="p">(</span><span class="s">&quot;TABLE_PREFIX&quot;</span><span class="p">).</span><span class="nx">String</span><span class="p">()</span>
+
+    <span class="nx">db</span><span class="p">,</span> <span class="nx">err</span> <span class="p">=</span> <span class="nx">gorm</span><span class="p">.</span><span class="nx">Open</span><span class="p">(</span><span class="nx">dbtype</span><span class="p">,</span> <span class="nx">fmt</span><span class="p">.</span><span class="nx">Sprintf</span><span class="p">(</span><span class="s">&quot;%s:%s@tcp(%s)/%s?charset=utf8&amp;parseTime=True&amp;loc=Local&quot;</span><span class="p">,</span>
+        <span class="nx">user</span><span class="p">,</span>
+        <span class="nx">password</span><span class="p">,</span>
+        <span class="nx">dbName</span><span class="p">))</span>
+
+    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="nx">log</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="nx">gorm</span><span class="p">.</span><span class="nx">DefaultTableNameHandler</span> <span class="p">=</span> <span class="kd">func</span><span class="p">(</span><span class="nx">db</span> <span class="o">*</span><span class="nx">gorm</span><span class="p">.</span><span class="nx">DB</span><span class="p">,</span> <span class="nx">defaultTableName</span> <span class="kt">string</span><span class="p">)</span> <span class="kt">string</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="nx">tablePrefix</span> <span class="o">+</span> <span class="nx">defaultTableName</span>
+    <span class="p">}</span>
+
+    <span class="nx">db</span><span class="p">.</span><span class="nx">SingularTable</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+    <span class="nx">db</span><span class="p">.</span><span class="nx">LogMode</span><span class="p">(</span><span class="kc">true</span><span class="p">)</span>
+    <span class="nx">db</span><span class="p">.</span><span class="nx">DB</span><span class="p">().</span><span class="nx">SetMaxIdleConns</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+    <span class="nx">db</span><span class="p">.</span><span class="nx">DB</span><span class="p">().</span><span class="nx">SetMaxOpenConns</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// CloseDB 关闭数据库连接</span>
+<span class="kd">func</span> <span class="nx">CloseDB</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">defer</span> <span class="nx">db</span><span class="p">.</span><span class="nx">Close</span><span class="p">()</span>
+<span class="p">}</span>
+</pre></div>
+
+<h2 id="demo">Demo</h2>
+<blockquote>
+<p>实例程序</p>
+</blockquote>
+<ul>
+<li>在<code>./</code>目录下新建<code>main.go</code>文件</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+    <span class="s">&quot;fmt&quot;</span>
+    <span class="nx">setting</span> <span class="s">&quot;go-gin-example/pkg/settings&quot;</span>
+    <span class="s">&quot;net/http&quot;</span>
+
+    <span class="s">&quot;github.com/gin-gonic/gin&quot;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">router</span> <span class="o">:=</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">Default</span><span class="p">()</span>
+    <span class="nx">router</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/test&quot;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+            <span class="s">&quot;message&quot;</span><span class="p">:</span> <span class="s">&quot;test&quot;</span><span class="p">,</span>
+        <span class="p">})</span>
+    <span class="p">})</span>
+
+    <span class="nx">s</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">http</span><span class="p">.</span><span class="nx">Server</span><span class="p">{</span>
+        <span class="nx">Addr</span><span class="p">:</span>           <span class="nx">fmt</span><span class="p">.</span><span class="nx">Sprintf</span><span class="p">(</span><span class="s">&quot;:%d&quot;</span><span class="p">,</span> <span class="nx">setting</span><span class="p">.</span><span class="nx">HTTPPort</span><span class="p">),</span>
+        <span class="nx">Handler</span><span class="p">:</span>        <span class="nx">router</span><span class="p">,</span>
+        <span class="nx">ReadTimeout</span><span class="p">:</span>    <span class="nx">setting</span><span class="p">.</span><span class="nx">ReadTimeout</span><span class="p">,</span>
+        <span class="nx">WriteTimeout</span><span class="p">:</span>   <span class="nx">setting</span><span class="p">.</span><span class="nx">WriteTimeout</span><span class="p">,</span>
+        <span class="nx">MaxHeaderBytes</span><span class="p">:</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="c1">// 调用在&amp;http.Server中设置的参数,因此上面要用&amp;,要改变参数的值</span>
+    <span class="nx">s</span><span class="p">.</span><span class="nx">ListenAndServe</span><span class="p">()</span>
+<span class="p">}</span>
+</pre></div>
+
+<ul>
+<li>浏览器输入<code>localhost：8000/test</code>返回<code>{"message":"test"}</code>则成功</li>
+</ul>
+<h2 id="maingo">从main.go中分离路由</h2>
+<ul>
+<li>在<code>./routers</code>目录下新建<code>router.go</code>文件</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nx">routers</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+    <span class="nx">setting</span> <span class="s">&quot;go-gin-example/pkg/settings&quot;</span>
+
+    <span class="s">&quot;github.com/gin-gonic/gin&quot;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nx">InitRouter</span><span class="p">()</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Engine</span> <span class="p">{</span>
+    <span class="nx">r</span> <span class="o">:=</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">New</span><span class="p">()</span>
+
+    <span class="nx">r</span><span class="p">.</span><span class="nx">Use</span><span class="p">(</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Logger</span><span class="p">())</span>
+    <span class="nx">r</span><span class="p">.</span><span class="nx">Use</span><span class="p">(</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Recovery</span><span class="p">())</span>
+
+    <span class="nx">gin</span><span class="p">.</span><span class="nx">SetMode</span><span class="p">(</span><span class="nx">setting</span><span class="p">.</span><span class="nx">RunMode</span><span class="p">)</span>
+
+    <span class="nx">r</span><span class="p">.</span><span class="nx">GET</span><span class="p">(</span><span class="s">&quot;/test&quot;</span><span class="p">,</span> <span class="kd">func</span><span class="p">(</span><span class="nx">c</span> <span class="o">*</span><span class="nx">gin</span><span class="p">.</span><span class="nx">Context</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">c</span><span class="p">.</span><span class="nx">JSON</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="nx">gin</span><span class="p">.</span><span class="nx">H</span><span class="p">{</span>
+            <span class="s">&quot;message&quot;</span><span class="p">:</span> <span class="s">&quot;test&quot;</span><span class="p">,</span>
+        <span class="p">})</span>
+    <span class="p">})</span>
+
+    <span class="k">return</span> <span class="nx">r</span>
+<span class="p">}</span>
+</pre></div>
+
+<ul>
+<li>修改<code>main.go</code>文件</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+    <span class="s">&quot;fmt&quot;</span>
+    <span class="nx">setting</span> <span class="s">&quot;go-gin-example/pkg/settings&quot;</span>
+    <span class="s">&quot;go-gin-example/routers&quot;</span>
+    <span class="s">&quot;net/http&quot;</span>
+<span class="p">)</span>
+
+<span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">router</span> <span class="o">:=</span> <span class="nx">routers</span><span class="p">.</span><span class="nx">InitRouter</span><span class="p">()</span>
+
+    <span class="nx">s</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">http</span><span class="p">.</span><span class="nx">Server</span><span class="p">{</span>
+        <span class="nx">Addr</span><span class="p">:</span>           <span class="nx">fmt</span><span class="p">.</span><span class="nx">Sprintf</span><span class="p">(</span><span class="s">&quot;:%d&quot;</span><span class="p">,</span> <span class="nx">setting</span><span class="p">.</span><span class="nx">HTTPPort</span><span class="p">),</span>
+        <span class="nx">Handler</span><span class="p">:</span>        <span class="nx">router</span><span class="p">,</span>
+        <span class="nx">ReadTimeout</span><span class="p">:</span>    <span class="nx">setting</span><span class="p">.</span><span class="nx">ReadTimeout</span><span class="p">,</span>
+        <span class="nx">WriteTimeout</span><span class="p">:</span>   <span class="nx">setting</span><span class="p">.</span><span class="nx">WriteTimeout</span><span class="p">,</span>
+        <span class="nx">MaxHeaderBytes</span><span class="p">:</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="p">}</span>
+
+    <span class="nx">s</span><span class="p">.</span><span class="nx">ListenAndServer</span><span class="p">()</span>
+<span class="p">}</span>
+</pre></div>
+
+<h2 id="_5">当前目录结构</h2>
+<div class="highlight"><pre><span></span>go-gin-example/
+├── conf
+│   └── app.ini
+├── main.go
+├── middleware
+├── models
+│   └── models.go
+├── pkg
+│   ├── e
+│   │   ├── code.go
+│   │   └── msg.go
+│   ├── setting
+│   │   └── setting.go
+│   └── util
+│       └── pagination.go
+├── routers
+│   └── router.go
+├── runtime
+</pre></div>
+                
+                  
+                
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../01 Config/" title="go-gin-example 01：配置" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  上一页
+                </span>
+                go-gin-example 01：配置
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../03 API-2/" title="go-gin-example 03：API-2" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  下一页
+                </span>
+                go-gin-example 03：API-2
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../assets/javascripts/application.808e90bb.js"></script>
+      
+        
+        
+          
+          <script src="../../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+                <script src="../../../assets/javascripts/lunr/tinyseg.js"></script>
+              
+              
+                <script src="../../../assets/javascripts/lunr/lunr.ja.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../../.."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sequence-diagrams/1.0.6/sequence-diagram-min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js"></script>
+      
+        <script src="../../../js/umlconvert.js"></script>
+      
+    
+  </body>
+</html>
