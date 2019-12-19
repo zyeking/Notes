@@ -534,7 +534,7 @@
 </li>
 <li>NewWithClaims 中加密方法有<code>SigningMethodHS256</code>，<code>SigningMethodHS384</code>、<code>SigningMethodHS512</code>三种<code>cropto.Hash</code>方案</li>
 </ul>
-<div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nx">util</span>
+<div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">util</span>
 
 <span class="kn">import</span> <span class="p">(</span>
     <span class="nx">setting</span> <span class="s">&quot;go-gin-example/pkg/settings&quot;</span>
@@ -590,10 +590,11 @@
 <span class="p">}</span>
 </pre></div>
 
+
 <ul>
 <li>编写Gin中间件，在<code>middleware</code>下新建<code>jwt</code>目录，在其中新建<code>jwt.go</code>文件写入</li>
 </ul>
-<div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nx">jwt</span>
+<div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">jwt</span>
 
 <span class="kn">import</span> <span class="p">(</span>
     <span class="s">&quot;go-gin-example/pkg/e&quot;</span>
@@ -638,10 +639,11 @@
 <span class="p">}</span>
 </pre></div>
 
+
 <ul>
 <li>获得token，在<code>./models</code>下新建<code>auth.go</code>文件写入</li>
 </ul>
-<div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nx">models</span>
+<div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">models</span>
 
 <span class="c1">// Auth Token认证</span>
 <span class="kd">type</span> <span class="nx">Auth</span> <span class="kd">struct</span> <span class="p">{</span>
@@ -661,8 +663,9 @@
 <span class="p">}</span>
 </pre></div>
 
+
 <p>在<code>./api</code>下新建<code>auth.go</code>文件写入</p>
-<div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nx">api</span>
+<div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">api</span>
 
 <span class="kn">import</span> <span class="p">(</span>
     <span class="s">&quot;go-gin-example/models&quot;</span>
@@ -719,10 +722,11 @@
 <span class="p">}</span>
 </pre></div>
 
+
 <ul>
 <li>修改<code>router.go</code>文件</li>
 </ul>
-<div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nx">routers</span>
+<div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">routers</span>
 
 <span class="kn">import</span> <span class="p">(</span>
     <span class="s">&quot;go-gin-example/middleware/jwt&quot;</span>
@@ -763,6 +767,7 @@
     <span class="k">return</span> <span class="nx">r</span>
 <span class="p">}</span>
 </pre></div>
+
 
 <ul>
 <li>调用</li>
@@ -861,16 +866,6 @@
         
       
       <script>app.initialize({version:"1.0.4",url:{base:"../../.."}})</script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sequence-diagrams/1.0.6/sequence-diagram-min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js"></script>
-      
-        <script src="../../../js/umlconvert.js"></script>
       
     
   </body>

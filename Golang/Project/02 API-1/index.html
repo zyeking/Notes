@@ -659,7 +659,7 @@
 <li>初始设置</li>
 </ul>
 <h2 id="_1">项目目录</h2>
-<div class="highlight"><pre><span></span>go-gin-example/
+<div class="codehilite"><pre><span></span>go-gin-example/
 ├─conf
 ├─middleware
 ├─models
@@ -667,6 +667,7 @@
 ├─routers
 └─runtime
 </pre></div>
+
 
 <ul>
 <li>conf：用于存储配置文件</li>
@@ -677,23 +678,24 @@
 <li>runtime：应用运行时数据</li>
 </ul>
 <h2 id="go-modules-replace">添加Go Modules Replace配置本地模块路径 （好像不必要）</h2>
-<div class="highlight"><pre><span></span>module go-gin-example
+<div class="codehilite"><pre><span></span><span class="k">module</span><span class="w"> </span><span class="k">go</span><span class="o">-</span><span class="n">gin</span><span class="o">-</span><span class="n">example</span><span class="w"></span>
 
-go 1.12
+<span class="k">go</span><span class="w"> </span><span class="mf">1.12</span><span class="w"></span>
 
-require (···)
+<span class="n">require</span><span class="w"> </span><span class="p">(</span><span class="err">···</span><span class="p">)</span><span class="w"></span>
 
-replace (
-    ./go-gin-example/conf =&gt; ./go-gin-example/pkg/conf
-    ./go-gin-example/middleware =&gt; ./go-gin-example/middleware
-    ./go-gin-example/models =&gt; ./go-gin-example/models
-    ./go-gin-example/pkg/e =&gt; ./go-gin-example/pkg/e
-    ./go-gin-example/pkg/setting =&gt; ./go-gin-example/pkg/setting
-    ./go-gin-example/pkg/util =&gt; ./go-gin-example/pkg/util
-    ./go-gin-example/routers =&gt; ./go-gin-example/routers
-)
-# 用 replace 将其指定读取本地的模块路径，这样子就可以解决本地模块读取的问题
+<span class="nf">replace</span><span class="w"> </span><span class="p">(</span><span class="w"></span>
+<span class="w">    </span><span class="p">.</span><span class="o">/</span><span class="k">go</span><span class="o">-</span><span class="n">gin</span><span class="o">-</span><span class="n">example</span><span class="o">/</span><span class="n">conf</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">.</span><span class="o">/</span><span class="k">go</span><span class="o">-</span><span class="n">gin</span><span class="o">-</span><span class="n">example</span><span class="o">/</span><span class="n">pkg</span><span class="o">/</span><span class="n">conf</span><span class="w"></span>
+<span class="w">    </span><span class="p">.</span><span class="o">/</span><span class="k">go</span><span class="o">-</span><span class="n">gin</span><span class="o">-</span><span class="n">example</span><span class="o">/</span><span class="n">middleware</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">.</span><span class="o">/</span><span class="k">go</span><span class="o">-</span><span class="n">gin</span><span class="o">-</span><span class="n">example</span><span class="o">/</span><span class="n">middleware</span><span class="w"></span>
+<span class="w">    </span><span class="p">.</span><span class="o">/</span><span class="k">go</span><span class="o">-</span><span class="n">gin</span><span class="o">-</span><span class="n">example</span><span class="o">/</span><span class="n">models</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">.</span><span class="o">/</span><span class="k">go</span><span class="o">-</span><span class="n">gin</span><span class="o">-</span><span class="n">example</span><span class="o">/</span><span class="n">models</span><span class="w"></span>
+<span class="w">    </span><span class="p">.</span><span class="o">/</span><span class="k">go</span><span class="o">-</span><span class="n">gin</span><span class="o">-</span><span class="n">example</span><span class="o">/</span><span class="n">pkg</span><span class="o">/</span><span class="n">e</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">.</span><span class="o">/</span><span class="k">go</span><span class="o">-</span><span class="n">gin</span><span class="o">-</span><span class="n">example</span><span class="o">/</span><span class="n">pkg</span><span class="o">/</span><span class="n">e</span><span class="w"></span>
+<span class="w">    </span><span class="p">.</span><span class="o">/</span><span class="k">go</span><span class="o">-</span><span class="n">gin</span><span class="o">-</span><span class="n">example</span><span class="o">/</span><span class="n">pkg</span><span class="o">/</span><span class="n">setting</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">.</span><span class="o">/</span><span class="k">go</span><span class="o">-</span><span class="n">gin</span><span class="o">-</span><span class="n">example</span><span class="o">/</span><span class="n">pkg</span><span class="o">/</span><span class="n">setting</span><span class="w"></span>
+<span class="w">    </span><span class="p">.</span><span class="o">/</span><span class="k">go</span><span class="o">-</span><span class="n">gin</span><span class="o">-</span><span class="n">example</span><span class="o">/</span><span class="n">pkg</span><span class="o">/</span><span class="n">util</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">.</span><span class="o">/</span><span class="k">go</span><span class="o">-</span><span class="n">gin</span><span class="o">-</span><span class="n">example</span><span class="o">/</span><span class="n">pkg</span><span class="o">/</span><span class="n">util</span><span class="w"></span>
+<span class="w">    </span><span class="p">.</span><span class="o">/</span><span class="k">go</span><span class="o">-</span><span class="n">gin</span><span class="o">-</span><span class="n">example</span><span class="o">/</span><span class="n">routers</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="p">.</span><span class="o">/</span><span class="k">go</span><span class="o">-</span><span class="n">gin</span><span class="o">-</span><span class="n">example</span><span class="o">/</span><span class="n">routers</span><span class="w"></span>
+<span class="p">)</span><span class="w"></span>
+<span class="err">#</span><span class="w"> </span><span class="n">用</span><span class="w"> </span><span class="nf">replace</span><span class="w"> </span><span class="n">将其指定读取本地的模块路径</span><span class="err">，</span><span class="n">这样子就可以解决本地模块读取的问题</span><span class="w"></span>
 </pre></div>
+
 
 <h2 id="ini">使用ini配置文件库/编写项目配置包</h2>
 <h3 id="_2">应用配置文件</h3>
@@ -713,7 +715,7 @@ replace (
 <li>定义公共参数：分页</li>
 <li>定义服务器端口、TIMEOUT时间等</li>
 </ul>
-<div class="highlight"><pre><span></span><span class="c1"># debug or release</span>
+<div class="codehilite"><pre><span></span><span class="c1"># debug or release</span>
 <span class="na">RUN_MODE</span> <span class="o">=</span> <span class="s">debug</span>
 
 <span class="k">[app]</span>
@@ -734,6 +736,7 @@ replace (
 <span class="na">TABLE_PREFIX</span> <span class="o">=</span> <span class="s">blog_</span>
 </pre></div>
 
+
 <h3 id="setting">调用配置的setting模块</h3>
 <blockquote>
 <p>负责调用app.ini</p>
@@ -742,7 +745,7 @@ replace (
 <li><code>go get -u github.com/go-ini/ini</code></li>
 <li>在<code>./pkg/setting</code>目录下新建<code>setting.go</code>文件</li>
 </ul>
-<div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nx">setting</span>
+<div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">setting</span>
 
 <span class="kn">import</span> <span class="p">(</span>
     <span class="s">&quot;log&quot;</span>
@@ -811,6 +814,7 @@ replace (
 <span class="p">}</span>
 </pre></div>
 
+
 <h3 id="api">API错误码包</h3>
 <blockquote>
 <p>建立错误码e模块</p>
@@ -823,7 +827,7 @@ replace (
 <p>code.go</p>
 </li>
 </ul>
-<div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nx">e</span> 
+<div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">e</span> 
 
 <span class="c1">// API错误代码</span>
 <span class="kd">const</span> <span class="p">(</span>
@@ -842,10 +846,11 @@ replace (
 <span class="p">)</span>
 </pre></div>
 
+
 <ul>
 <li>msg.go</li>
 </ul>
-<div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nx">e</span>
+<div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">e</span>
 <span class="c1">//msg.go</span>
 
 <span class="c1">// MsgFlags 错误信息</span>
@@ -872,6 +877,7 @@ replace (
 <span class="p">}</span>
 </pre></div>
 
+
 <h3 id="_3">工具包</h3>
 <blockquote>
 <p>公共方法：例如获取分页页码等</p>
@@ -880,7 +886,7 @@ replace (
 <li><code>go get -u github.com/unknwon/com</code></li>
 <li>在<code>./pkg/util</code>目录下新建<code>pagination.go</code>文件</li>
 </ul>
-<div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nx">util</span>
+<div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">util</span>
 
 <span class="kn">import</span> <span class="p">(</span>
     <span class="nx">setting</span> <span class="s">&quot;go-gin-example/pkg/settings&quot;</span>
@@ -901,6 +907,7 @@ replace (
 <span class="p">}</span>
 </pre></div>
 
+
 <h3 id="_4">数据库模型映射</h3>
 <blockquote>
 <p>通过gorm将golang结构体映射到数据库中自动生成模型</p>
@@ -910,7 +917,7 @@ replace (
 <li><code>go get -u github.com/go-sql-driver/mysql</code></li>
 <li>在<code>./models</code>目录下新建<code>models.go</code>文件。</li>
 </ul>
-<div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nx">models</span>
+<div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">models</span>
 
 <span class="kn">import</span> <span class="p">(</span>
     <span class="s">&quot;fmt&quot;</span>
@@ -972,6 +979,7 @@ replace (
 <span class="p">}</span>
 </pre></div>
 
+
 <h2 id="demo">Demo</h2>
 <blockquote>
 <p>实例程序</p>
@@ -979,7 +987,7 @@ replace (
 <ul>
 <li>在<code>./</code>目录下新建<code>main.go</code>文件</li>
 </ul>
-<div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
+<div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
 
 <span class="kn">import</span> <span class="p">(</span>
     <span class="s">&quot;fmt&quot;</span>
@@ -1009,6 +1017,7 @@ replace (
 <span class="p">}</span>
 </pre></div>
 
+
 <ul>
 <li>浏览器输入<code>localhost：8000/test</code>返回<code>{"message":"test"}</code>则成功</li>
 </ul>
@@ -1016,7 +1025,7 @@ replace (
 <ul>
 <li>在<code>./routers</code>目录下新建<code>router.go</code>文件</li>
 </ul>
-<div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nx">routers</span>
+<div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">routers</span>
 
 <span class="kn">import</span> <span class="p">(</span>
     <span class="nx">setting</span> <span class="s">&quot;go-gin-example/pkg/settings&quot;</span>
@@ -1042,10 +1051,11 @@ replace (
 <span class="p">}</span>
 </pre></div>
 
+
 <ul>
 <li>修改<code>main.go</code>文件</li>
 </ul>
-<div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
+<div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
 
 <span class="kn">import</span> <span class="p">(</span>
     <span class="s">&quot;fmt&quot;</span>
@@ -1069,8 +1079,9 @@ replace (
 <span class="p">}</span>
 </pre></div>
 
+
 <h2 id="_5">当前目录结构</h2>
-<div class="highlight"><pre><span></span>go-gin-example/
+<div class="codehilite"><pre><span></span>go-gin-example/
 ├── conf
 │   └── app.ini
 ├── main.go
@@ -1179,16 +1190,6 @@ replace (
         
       
       <script>app.initialize({version:"1.0.4",url:{base:"../../.."}})</script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sequence-diagrams/1.0.6/sequence-diagram-min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js"></script>
-      
-        <script src="../../../js/umlconvert.js"></script>
       
     
   </body>

@@ -669,7 +669,7 @@
 </ol>
 <h3 id="docker_2">Docker基本指令</h3>
 <h3 id="dockerfile">编写Dockerfile</h3>
-<p><div class="highlight"><pre><span></span>FROM golang:latest
+<div class="codehilite"><pre><span></span>FROM golang:latest
 
 ENV GOPROXY https://goproxy.cn,direct
 WORKDIR <span class="nv">$GOPATH</span>/src/go-gin-example
@@ -679,29 +679,41 @@ RUN go build .
 EXPOSE <span class="m">8000</span>
 ENTRYPOINT <span class="o">[</span><span class="s2">&quot;./go-gin-example&quot;</span><span class="o">]</span>
 </pre></div>
-1. <code>FROM</code>: 指定基础镜像, 该指令必须要有,且得为第一条
-2. <code>WORKDIR</code>: 指定工作目录路径, 若目录不存在, 则会创建改目录
-3. <code>COPY</code>: 源路径 ... 目标路径, <code>COPY</code>指令将<code>Dockerfile</code>文件所存在的上下文目录<code>复制</code>到目标路径位置
-4. <code>RUN</code>: 执行命令
-5. <code>EXPOSE</code>: 声明<code>运行时容器</code>提供服务端口, 仅仅是一个<code>声明</code>, 不会因为这个声明而开启这个端口
-6. <code>ENTRYPOINT</code>: 指定<code>容器</code>启动程序的及参数(执行<code>./go-gin-example)</code></p>
+
+
+<ol>
+<li><code>FROM</code>: 指定基础镜像, 该指令必须要有,且得为第一条</li>
+<li><code>WORKDIR</code>: 指定工作目录路径, 若目录不存在, 则会创建改目录</li>
+<li><code>COPY</code>: 源路径 ... 目标路径, <code>COPY</code>指令将<code>Dockerfile</code>文件所存在的上下文目录<code>复制</code>到目标路径位置</li>
+<li><code>RUN</code>: 执行命令</li>
+<li><code>EXPOSE</code>: 声明<code>运行时容器</code>提供服务端口, 仅仅是一个<code>声明</code>, 不会因为这个声明而开启这个端口</li>
+<li><code>ENTRYPOINT</code>: 指定<code>容器</code>启动程序的及参数(执行<code>./go-gin-example)</code></li>
+</ol>
 <h3 id="_1">运行</h3>
-<p><div class="highlight"><pre><span></span>docker build -t gin-blog-docker .
-docker images
-docker run -p 8000:8000 gin-blog-docker
+<div class="codehilite"><pre><span></span><span class="n">docker</span> <span class="n">build</span> <span class="o">-</span><span class="n">t</span> <span class="n">gin</span><span class="o">-</span><span class="n">blog</span><span class="o">-</span><span class="n">docker</span> <span class="p">.</span>
+<span class="n">docker</span> <span class="n">images</span>
+<span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">p</span> <span class="mi">8000</span><span class="p">:</span><span class="mi">8000</span> <span class="n">gin</span><span class="o">-</span><span class="n">blog</span><span class="o">-</span><span class="n">docker</span>
 </pre></div>
-1. 在<code>.</code>当前环境运行<code>docker build</code>创建/构建镜像, <code>-t</code>指定名称
-2. <code>docker images</code> 查看镜像是否创建成功
-3. 在本地8000端口运行容器
-4. 发现<code>dial tcp 127.0.0.1:3306: connect: connection refused</code>错误</p>
+
+
+<ol>
+<li>在<code>.</code>当前环境运行<code>docker build</code>创建/构建镜像, <code>-t</code>指定名称</li>
+<li><code>docker images</code> 查看镜像是否创建成功</li>
+<li>在本地8000端口运行容器</li>
+<li>发现<code>dial tcp 127.0.0.1:3306: connect: connection refused</code>错误</li>
+</ol>
 <h3 id="mysql-docker">配置Mysql Docker</h3>
-<p><div class="highlight"><pre><span></span>docker pull mysql
-docker run --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -d mysql
+<div class="codehilite"><pre><span></span><span class="n">docker</span> <span class="n">pull</span> <span class="n">mysql</span>
+<span class="n">docker</span> <span class="n">run</span> <span class="c1">--name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -d mysql</span>
 </pre></div>
-1. 拉取mysql镜像
-2. 配置mysql端口</p>
+
+
+<ol>
+<li>拉取mysql镜像</li>
+<li>配置mysql端口</li>
+</ol>
 <h4 id="confini">修改配置文件<code>conf.ini</code></h4>
-<div class="highlight"><pre><span></span><span class="k">[database]</span>
+<div class="codehilite"><pre><span></span><span class="k">[database]</span>
 <span class="na">TYPE</span> <span class="o">=</span> <span class="s">mysql</span>
 <span class="na">USER</span> <span class="o">=</span> <span class="s">root</span>
 <span class="na">PASSWORD</span> <span class="o">=</span> <span class="s">rootroot</span>
@@ -709,6 +721,7 @@ docker run --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -d mysql
 <span class="na">NAME</span> <span class="o">=</span> <span class="s">blog</span>
 <span class="na">TABLE_PREFIX</span> <span class="o">=</span> <span class="s">blog_</span>
 </pre></div>
+
 
 <h3 id="golangmysql">关联Golang容器和Mysql容器</h3>
 <p><code>docker run --link mysql:mysql -p 8000:8000 gin-blog-docker</code></p>
@@ -803,16 +816,6 @@ docker run --name mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=root -d mysql
         
       
       <script>app.initialize({version:"1.0.4",url:{base:"../../.."}})</script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sequence-diagrams/1.0.6/sequence-diagram-min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js"></script>
-      
-        <script src="../../../js/umlconvert.js"></script>
       
     
   </body>

@@ -478,8 +478,9 @@
 </ul>
 <h3 id="callback">定义callback</h3>
 <ol>
-<li>在<code>model.go</code>文件中定义
-<div class="highlight"><pre><span></span><span class="c1">// updateTimeStampForCreateCallback will set `CreatedOn`, `ModifiedOn` when creating</span>
+<li>在<code>model.go</code>文件中定义</li>
+</ol>
+<div class="codehilite"><pre><span></span><span class="c1">// updateTimeStampForCreateCallback will set `CreatedOn`, `ModifiedOn` when creating</span>
 <span class="kd">func</span> <span class="nx">updateTimeStampForCreateCallback</span><span class="p">(</span><span class="nx">scope</span> <span class="o">*</span><span class="nx">gorm</span><span class="p">.</span><span class="nx">Scope</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">!</span><span class="nx">scope</span><span class="p">.</span><span class="nx">HasError</span><span class="p">()</span> <span class="p">{</span>
         <span class="nx">nowTime</span> <span class="o">:=</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Now</span><span class="p">().</span><span class="nx">Unix</span><span class="p">()</span>
@@ -503,7 +504,10 @@
         <span class="nx">scope</span><span class="p">.</span><span class="nx">SetColumn</span><span class="p">(</span><span class="s">&quot;ModifiedOn&quot;</span><span class="p">,</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Now</span><span class="p">().</span><span class="nx">Unix</span><span class="p">())</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</pre></div></li>
+</pre></div>
+
+
+<ol>
 <li>通过<code>scope.FieldByName(name)</code>判断是否存在相关字段, 该方法通过<code>scope.Fields()</code>获取所有字段</li>
 <li>通过<code>.IsBlank</code>判断值是否为空</li>
 <li>通过<code>.Set(interface{})</code>设置相关值</li>
@@ -512,25 +516,29 @@
 </ol>
 <h3 id="callback_1">调用callback</h3>
 <ol>
-<li>在<code>model.go</code>的<code>ini</code>函数中注册callback
-<div class="highlight"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">Callback</span><span class="p">().</span><span class="nx">Create</span><span class="p">().</span><span class="nx">Replace</span><span class="p">(</span><span class="s">&quot;gorm:update_time_stamp&quot;</span><span class="p">,</span> <span class="nx">updateTimeStampForCreateCallback</span><span class="p">)</span>
-<span class="nx">db</span><span class="p">.</span><span class="nx">Callback</span><span class="p">().</span><span class="nx">Update</span><span class="p">().</span><span class="nx">Replace</span><span class="p">(</span><span class="s">&quot;gorm:update_time_stamp&quot;</span><span class="p">,</span> <span class="nx">updateTimeStampForUpdateCallback</span><span class="p">)</span>
-</pre></div></li>
+<li>在<code>model.go</code>的<code>ini</code>函数中注册callback</li>
 </ol>
+<div class="codehilite"><pre><span></span><span class="nx">db</span><span class="p">.</span><span class="nx">Callback</span><span class="p">().</span><span class="nx">Create</span><span class="p">().</span><span class="nx">Replace</span><span class="p">(</span><span class="s">&quot;gorm:update_time_stamp&quot;</span><span class="p">,</span> <span class="nx">updateTimeStampForCreateCallback</span><span class="p">)</span>
+<span class="nx">db</span><span class="p">.</span><span class="nx">Callback</span><span class="p">().</span><span class="nx">Update</span><span class="p">().</span><span class="nx">Replace</span><span class="p">(</span><span class="s">&quot;gorm:update_time_stamp&quot;</span><span class="p">,</span> <span class="nx">updateTimeStampForUpdateCallback</span><span class="p">)</span>
+</pre></div>
+
+
 <h2 id="_2">效果</h2>
 <p>当程序写了<code>Callback</code>方法的时候, 当GORM执行到相关的操作会自动触发相应的<code>Callback</code>方法</p>
 <h2 id="_3">拓展</h2>
 <ol>
-<li>软删除, 添加删除时间, 为<code>model.go</code>的<code>Model</code>结构体添加<code>DeletedOn</code>字段
-<div class="highlight"><pre><span></span><span class="kd">type</span> <span class="nx">Model</span> <span class="kd">struct</span> <span class="p">{</span>
+<li>软删除, 添加删除时间, 为<code>model.go</code>的<code>Model</code>结构体添加<code>DeletedOn</code>字段</li>
+</ol>
+<div class="codehilite"><pre><span></span><span class="kd">type</span> <span class="nx">Model</span> <span class="kd">struct</span> <span class="p">{</span>
     <span class="nx">ID</span> <span class="kt">int</span> <span class="s">`gorm:&quot;primary_key&quot; json:&quot;id&quot;`</span>
     <span class="nx">CreatedOn</span> <span class="kt">int</span> <span class="s">`json:&quot;created_on&quot;`</span>
     <span class="nx">ModifiedOn</span> <span class="kt">int</span> <span class="s">`json:&quot;modified_on&quot;`</span>
     <span class="nx">DeletedOn</span> <span class="kt">int</span> <span class="s">`json:&quot;deleted_on&quot;`</span>
 <span class="p">}</span>
-</pre></div></li>
-</ol>
-<p><div class="highlight"><pre><span></span><span class="kd">func</span> <span class="nx">deleteCallback</span><span class="p">(</span><span class="nx">scope</span> <span class="o">*</span><span class="nx">gorm</span><span class="p">.</span><span class="nx">Scope</span><span class="p">)</span> <span class="p">{</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span><span class="kd">func</span> <span class="nx">deleteCallback</span><span class="p">(</span><span class="nx">scope</span> <span class="o">*</span><span class="nx">gorm</span><span class="p">.</span><span class="nx">Scope</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">!</span><span class="nx">scope</span><span class="p">.</span><span class="nx">HasError</span><span class="p">()</span> <span class="p">{</span>
         <span class="kd">var</span> <span class="nx">extraOption</span> <span class="kt">string</span>
         <span class="k">if</span> <span class="nx">str</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">scope</span><span class="p">.</span><span class="nx">Get</span><span class="p">(</span><span class="s">&quot;gorm:delete_option&quot;</span><span class="p">);</span> <span class="nx">ok</span> <span class="p">{</span>
@@ -566,14 +574,16 @@
     <span class="k">return</span> <span class="s">&quot;&quot;</span>
 <span class="p">}</span>
 </pre></div>
-在<code>model.go</code>的<code>ini函数</code>中添加<code>db.Callback().Delete().Replace("gorm:delete", deleteCallback)</code>
+
+
+<p>在<code>model.go</code>的<code>ini函数</code>中添加<code>db.Callback().Delete().Replace("gorm:delete", deleteCallback)</code>
 1. <code>scope.QuotedTableName()</code>返回引用的表名
 2. <code>scope.Raw()</code>构建原生sql
 3. <code>fmt.Sprintf()</code>格式化并且返回格式化后的字符串数据
 4. <code>scope.AddToVars(value)</code>为字段添加参数
 5. <code>scope.Quote()</code>转义
-6. <code>scope</code>当你在数据库中文完成任何操作, scope包含了当前操作信息
-<div class="highlight"><pre><span></span><span class="c1">// Scope contain current operation&#39;s information when you perform any operation on the database</span>
+6. <code>scope</code>当你在数据库中文完成任何操作, scope包含了当前操作信息</p>
+<div class="codehilite"><pre><span></span><span class="c1">// Scope contain current operation&#39;s information when you perform any operation on the database</span>
 <span class="kd">type</span> <span class="nx">Scope</span> <span class="kd">struct</span> <span class="p">{</span>
     <span class="nx">Search</span>          <span class="o">*</span><span class="nx">search</span>
     <span class="nx">Value</span>           <span class="kd">interface</span><span class="p">{}</span>
@@ -586,7 +596,9 @@
     <span class="nx">fields</span>          <span class="o">*</span><span class="p">[]</span><span class="o">*</span><span class="nx">Field</span>
     <span class="nx">selectAttrs</span>     <span class="o">*</span><span class="p">[]</span><span class="kt">string</span>
 <span class="p">}</span>
-</pre></div></p>
+</pre></div>
+
+
 <h2 id="ref">REF:</h2>
 <p><a href="http://gorm.book.jasperxu.com/callbacks.html">official: callback in gorm</a></p>
                 
@@ -679,16 +691,6 @@
         
       
       <script>app.initialize({version:"1.0.4",url:{base:"../../.."}})</script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sequence-diagrams/1.0.6/sequence-diagram-min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js"></script>
-      
-        <script src="../../../js/umlconvert.js"></script>
       
     
   </body>

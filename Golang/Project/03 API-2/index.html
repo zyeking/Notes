@@ -579,7 +579,7 @@
 <ul>
 <li><code>在./routers/api</code>下新建<code>v1</code>目录，目录内新建<code>tag.go</code>文件代表第一个API大版本</li>
 </ul>
-<div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nx">v1</span>
+<div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">v1</span>
 
 <span class="kn">import</span> <span class="p">(</span>
     <span class="s">&quot;github.com/gin-gonic/gin&quot;</span>
@@ -602,6 +602,7 @@
 <span class="p">}</span>
 </pre></div>
 
+
 <h2 id="_3">注册路由</h2>
 <blockquote>
 <p>该路由负责分发各个api请求给相应的<code>handler</code>者</p>
@@ -609,7 +610,7 @@
 <ul>
 <li>打开<code>./routers</code>下的<code>router.go</code>文件，修改为：</li>
 </ul>
-<div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nx">routers</span>
+<div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">routers</span>
 
 <span class="kn">import</span> <span class="p">(</span>
     <span class="nx">setting</span> <span class="s">&quot;go-gin-example/pkg/settings&quot;</span>
@@ -638,6 +639,7 @@
 <span class="p">}</span>
 </pre></div>
 
+
 <ul>
 <li>用<code>go run main.go</code>检测是否成功注册路由<img alt="" src="https://i.loli.net/2019/10/16/5aYko71PWEAfUxG.jpg" /></li>
 </ul>
@@ -650,7 +652,7 @@
 <li><code>go get -u github.com/astaxie/beego/validation</code></li>
 <li>在<code>models</code>目录下的<code>tag.go</code>写入</li>
 </ul>
-<div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nx">models</span>
+<div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">models</span>
 
 <span class="kn">import</span> <span class="p">(</span>
     <span class="s">&quot;time&quot;</span>
@@ -737,6 +739,7 @@
 <span class="p">}</span>
 </pre></div>
 
+
 <h2 id="_5">编写标签列表的路由逻辑</h2>
 <blockquote>
 <p>完善空壳路由</p>
@@ -753,7 +756,7 @@
 <ul>
 <li>在<code>./routers/v1/tag.go</code>写入</li>
 </ul>
-<div class="highlight"><pre><span></span><span class="kn">package</span> <span class="nx">v1</span>
+<div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">v1</span>
 
 <span class="kn">import</span> <span class="p">(</span>
     <span class="s">&quot;go-gin-example/models&quot;</span>
@@ -993,16 +996,6 @@
         
       
       <script>app.initialize({version:"1.0.4",url:{base:"../../.."}})</script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/raphael/2.2.7/raphael.min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sequence-diagrams/1.0.6/sequence-diagram-min.js"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/flowchart/1.6.5/flowchart.min.js"></script>
-      
-        <script src="../../../js/umlconvert.js"></script>
       
     
   </body>
