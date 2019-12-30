@@ -14,6 +14,8 @@
         <link rel="canonical" href="https://zyeking.github.io/Notes/Docker/02 EntryPointAndCMD/">
       
       
+        <meta name="author" content="kingCheung">
+      
       
         <meta name="lang:clipboard.copy" content="复制">
       
@@ -1059,29 +1061,21 @@
 <p><code>ENTRYPOINT ["/bin/echo", "Hello"]</code>
 1. 运行<code>docker run -it [image]</code>, 输出Hello
 2. 运行<code>docker run -it [image] kk</code>, 输出Hello kk, 原本的Hello仍然会输出</p>
-<p>修改<code>Dockerfile</code>为</p>
-<div class="codehilite"><pre><span></span><span class="n">ENTRYPOINT</span> <span class="p">[</span><span class="ss">&quot;/bin/echo&quot;</span><span class="p">,</span> <span class="ss">&quot;Hello&quot;</span><span class="p">]</span>
-<span class="n">CMD</span> <span class="p">[</span><span class="ss">&quot;world&quot;</span><span class="p">]</span>
+<p>修改<code>Dockerfile</code>为
+<div class="codehilite"><pre><span></span><span class="err">ENTRYPOINT [&quot;/bin/echo&quot;, &quot;Hello&quot;]</span>
+<span class="err">CMD [&quot;world&quot;]</span>
 </pre></div>
-
-
-<ol>
-<li>运行<code>docker run -it [name]</code>, 输出Hello world</li>
-<li>运行<code>docker run -it [name] king</code>, 输出Hello king, <code>CMD</code>参数被动态替换.</li>
-</ol>
+1. 运行<code>docker run -it [name]</code>, 输出Hello world
+2. 运行<code>docker run -it [name] king</code>, 输出Hello king, <code>CMD</code>参数被动态替换.</p>
 <h2 id="run">RUN命令</h2>
-<div class="codehilite"><pre><span></span><span class="k">RUN</span> apt-get update <span class="o">&amp;&amp;</span> apt-get install -y <span class="se">\ </span> 
+<p><div class="codehilite"><pre><span></span><span class="k">RUN</span> apt-get update <span class="o">&amp;&amp;</span> apt-get install -y <span class="se">\ </span> 
  bzr <span class="se">\</span>
  cvs <span class="se">\</span>
  git <span class="se">\</span>
  mercurial <span class="se">\</span>
  subversion
 </pre></div>
-
-
-<ol>
-<li><code>apt-get update</code> 和 <code>apt-get install</code>放在同一个<code>RUN</code>指令执行可以==保证每次安装的都是最新的包==; 如果将<code>apt-get install</code>放在单独的的<code>RUN</code>中执行, 则会使用<code>apt-get update</code>创建的镜像层, 这层镜像可能是很久以前缓存的.</li>
-</ol>
+1. <code>apt-get update</code> 和 <code>apt-get install</code>放在同一个<code>RUN</code>指令执行可以==保证每次安装的都是最新的包==; 如果将<code>apt-get install</code>放在单独的的<code>RUN</code>中执行, 则会使用<code>apt-get update</code>创建的镜像层, 这层镜像可能是很久以前缓存的.</p>
 <h2 id="_2">总结</h2>
 <ul>
 <li><code>CMD</code>设置容器启动后==默认执行的命令以及参数==, 设置的指令可以被<code>docker run</code>命令后面的命令函参数==动态替换==</li>

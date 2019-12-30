@@ -14,6 +14,8 @@
         <link rel="canonical" href="https://zyeking.github.io/Notes/Golang/Project/go-gin-example/02 API-1/">
       
       
+        <meta name="author" content="kingCheung">
+      
       
         <meta name="lang:clipboard.copy" content="复制">
       
@@ -1127,7 +1129,6 @@
 └─runtime
 </pre></div>
 
-
 <ul>
 <li>conf：用于存储配置文件</li>
 <li>middleware：应用中间件</li>
@@ -1154,7 +1155,6 @@
 <span class="p">)</span><span class="w"></span>
 <span class="err">#</span><span class="w"> </span><span class="n">用</span><span class="w"> </span><span class="nf">replace</span><span class="w"> </span><span class="n">将其指定读取本地的模块路径</span><span class="err">，</span><span class="n">这样子就可以解决本地模块读取的问题</span><span class="w"></span>
 </pre></div>
-
 
 <h2 id="ini">使用ini配置文件库/编写项目配置包</h2>
 <h3 id="_2">应用配置文件</h3>
@@ -1194,7 +1194,6 @@
 <span class="na">NAME</span> <span class="o">=</span> <span class="s">blog</span>
 <span class="na">TABLE_PREFIX</span> <span class="o">=</span> <span class="s">blog_</span>
 </pre></div>
-
 
 <h3 id="setting">调用配置的setting模块</h3>
 <blockquote>
@@ -1273,7 +1272,6 @@
 <span class="p">}</span>
 </pre></div>
 
-
 <h3 id="api">API错误码包</h3>
 <blockquote>
 <p>建立错误码e模块</p>
@@ -1305,7 +1303,6 @@
 <span class="p">)</span>
 </pre></div>
 
-
 <ul>
 <li>msg.go</li>
 </ul>
@@ -1336,7 +1333,6 @@
 <span class="p">}</span>
 </pre></div>
 
-
 <h3 id="_3">工具包</h3>
 <blockquote>
 <p>公共方法：例如获取分页页码等</p>
@@ -1365,7 +1361,6 @@
     <span class="k">return</span> <span class="nx">result</span>
 <span class="p">}</span>
 </pre></div>
-
 
 <h3 id="_4">数据库模型映射</h3>
 <blockquote>
@@ -1438,7 +1433,6 @@
 <span class="p">}</span>
 </pre></div>
 
-
 <h2 id="demo">Demo</h2>
 <blockquote>
 <p>实例程序</p>
@@ -1476,7 +1470,6 @@
 <span class="p">}</span>
 </pre></div>
 
-
 <ul>
 <li>浏览器输入<code>localhost：8000/test</code>返回<code>{"message":"test"}</code>则成功</li>
 </ul>
@@ -1510,7 +1503,6 @@
 <span class="p">}</span>
 </pre></div>
 
-
 <ul>
 <li>修改<code>main.go</code>文件</li>
 </ul>
@@ -1537,7 +1529,6 @@
     <span class="nx">s</span><span class="p">.</span><span class="nx">ListenAndServer</span><span class="p">()</span>
 <span class="p">}</span>
 </pre></div>
-
 
 <h2 id="_5">当前目录结构</h2>
 <div class="codehilite"><pre><span></span>go-gin-example/

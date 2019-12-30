@@ -14,6 +14,8 @@
         <link rel="canonical" href="https://zyeking.github.io/Notes/Golang/Go-Web/03 AdvanceTemplateUsage/">
       
       
+        <meta name="author" content="kingCheung">
+      
       
         <meta name="lang:clipboard.copy" content="复制">
       
@@ -1097,7 +1099,7 @@
                 
                 <h1 id="03">03：进阶模板用法</h1>
 <h2 id="_1">在模板中定义变量</h2>
-<div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
+<p><div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
 
 <span class="kn">import</span> <span class="p">(</span>
     <span class="s">&quot;fmt&quot;</span>
@@ -1131,9 +1133,7 @@
     <span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">ListenAndServe</span><span class="p">(</span><span class="s">&quot;:8000&quot;</span><span class="p">,</span> <span class="kc">nil</span><span class="p">))</span>
 <span class="p">}</span>
 </pre></div>
-
-
-<p><img alt="" src="https://i.loli.net/2019/11/14/KR3SbYcathd2wAl.jpg" /></p>
+<img alt="" src="https://i.loli.net/2019/11/14/KR3SbYcathd2wAl.jpg" /></p>
 <ol>
 <li>用美元符号<code>$</code>作为前缀表示变<code>$name</code>,<code>$age</code></li>
 <li>变量的定义/赋值必须使用<code>:=</code>语法</li>
@@ -1141,7 +1141,7 @@
 <li>所有变量的操作都属于模板语法的一部分,需要用<code>{{}}</code>括起来</li>
 </ol>
 <h3 id="_2">修改变量的值</h3>
-<div class="codehilite"><pre><span></span>    <span class="o">...</span>
+<p><div class="codehilite"><pre><span></span>    <span class="o">...</span>
     <span class="nx">tmpl</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">template</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">).</span><span class="nx">Parse</span><span class="p">(</span><span class="s">`</span>
 <span class="s">        {{$name := &quot;Alice&quot;}}</span>
 <span class="s">        {{$age := 18}}</span>
@@ -1154,14 +1154,12 @@
 <span class="s">        `</span><span class="p">)</span>
     <span class="o">...</span>
 </pre></div>
-
-
-<p><img alt="" src="https://i.loli.net/2019/11/14/APR1blvDUkTWrYf.jpg" /></p>
+<img alt="" src="https://i.loli.net/2019/11/14/APR1blvDUkTWrYf.jpg" /></p>
 <ol>
 <li>类似赋值, 用<code>=</code>号直接修改变量值</li>
 </ol>
 <h2 id="if">在模板中使用条件判断(if)</h2>
-<div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
+<p><div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
 
 <span class="kn">import</span> <span class="p">(</span>
     <span class="s">&quot;fmt&quot;</span>
@@ -1206,9 +1204,7 @@
     <span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">ListenAndServe</span><span class="p">(</span><span class="s">&quot;:8000&quot;</span><span class="p">,</span> <span class="kc">nil</span><span class="p">))</span>
 <span class="p">}</span>
 </pre></div>
-
-
-<p><img alt="" src="https://i.loli.net/2019/11/14/p2sIdU3nZ7ewN9A.jpg" /></p>
+<img alt="" src="https://i.loli.net/2019/11/14/p2sIdU3nZ7ewN9A.jpg" /></p>
 <ol>
 <li>用<code>{{}}</code>将<code>if</code>逻辑语句括起来, <code>if</code>后面必须返回一个<code>bool</code>值</li>
 <li><code>if</code>语句包括<code>{{if}}</code>, <code>{{else}}</code>,<code>{{end}}</code></li>
@@ -1224,7 +1220,7 @@
 <li><code>ge</code>：当不等式 arg1 <code>&gt;=</code> arg2 成立时，返回 true，否则返回 false</li>
 </ol>
 </blockquote>
-<div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
+<p><div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
 
 <span class="kn">import</span> <span class="p">(</span>
     <span class="s">&quot;fmt&quot;</span>
@@ -1263,14 +1259,12 @@
     <span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">ListenAndServe</span><span class="p">(</span><span class="s">&quot;localhost:8000&quot;</span><span class="p">,</span> <span class="kc">nil</span><span class="p">))</span>
 <span class="p">}</span>
 </pre></div>
-
-
-<p><img alt="" src="https://i.loli.net/2019/11/14/kcseSZ9nXhjIf4N.jpg" /></p>
+<img alt="" src="https://i.loli.net/2019/11/14/kcseSZ9nXhjIf4N.jpg" /></p>
 <h2 id="range">迭代操作(range)</h2>
 <blockquote>
 <p>Go 语言中一般来说有三种类型可以进行迭代操作，数组（Array）、切片（Slice）和 map 类型</p>
 </blockquote>
-<div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
+<p><div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
 
 <span class="kn">import</span> <span class="p">(</span>
     <span class="s">&quot;fmt&quot;</span>
@@ -1309,9 +1303,7 @@
     <span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">ListenAndServe</span><span class="p">(</span><span class="s">&quot;localhost:8000&quot;</span><span class="p">,</span> <span class="kc">nil</span><span class="p">))</span>
 <span class="p">}</span>
 </pre></div>
-
-
-<p><img alt="" src="https://i.loli.net/2019/11/14/vkhEKBrH1LbON8y.jpg" /></p>
+<img alt="" src="https://i.loli.net/2019/11/14/vkhEKBrH1LbON8y.jpg" /></p>
 <h3 id="_4">获得迭代元素的索引</h3>
 <div class="codehilite"><pre><span></span><span class="o">...</span>
 <span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
@@ -1324,7 +1316,6 @@
 <span class="s">`</span><span class="p">)</span>
 <span class="o">...</span>
 </pre></div>
-
 
 <h3 id="map">map类型</h3>
 <div class="codehilite"><pre><span></span><span class="o">...</span>
@@ -1351,9 +1342,8 @@
 <span class="p">}</span>
 </pre></div>
 
-
 <h2 id="with">with</h2>
-<div class="codehilite"><pre><span></span><span class="nx">tmpl</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">template</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">).</span><span class="nx">Parse</span><span class="p">(</span><span class="s">`Inventory</span>
+<p><div class="codehilite"><pre><span></span><span class="nx">tmpl</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">template</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">).</span><span class="nx">Parse</span><span class="p">(</span><span class="s">`Inventory</span>
 <span class="s">    {{with .Inventory}}</span>
 <span class="s">        SKU: {{.SKU}}</span>
 <span class="s">        Name: {{.Name}}</span>
@@ -1371,11 +1361,7 @@
         <span class="p">},</span>
     <span class="p">})</span>
 </pre></div>
-
-
-<ol>
-<li>用<code>{{with}}</code>来替代相关实例"<strong>Inventory</strong>".</li>
-</ol>
+1. 用<code>{{with}}</code>来替代相关实例"<strong>Inventory</strong>".</p>
 <h2 id="_5">空白符号处理</h2>
 <blockquote>
 <p><code>{{-</code> 表示剔除模板内容<code>左侧</code>的所有空白符号, <code>-}}</code> 表示剔除模板内容<code>右侧</code>的所有空白符号.</p>

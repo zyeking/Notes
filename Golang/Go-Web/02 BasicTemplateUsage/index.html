@@ -14,6 +14,8 @@
         <link rel="canonical" href="https://zyeking.github.io/Notes/Golang/Go-Web/02 BasicTemplateUsage/">
       
       
+        <meta name="author" content="kingCheung">
+      
       
         <meta name="lang:clipboard.copy" content="复制">
       
@@ -1112,7 +1114,7 @@
 </blockquote>
 <h2 id="_3">如何使用模板</h2>
 <h3 id="_4">实例</h3>
-<div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
+<p><div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
 
 <span class="kn">import</span> <span class="p">(</span>
     <span class="s">&quot;fmt&quot;</span>
@@ -1142,16 +1144,12 @@
     <span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">ListenAndServe</span><span class="p">(</span><span class="s">&quot;:8000&quot;</span><span class="p">,</span> <span class="kc">nil</span><span class="p">))</span>
 <span class="p">}</span>
 </pre></div>
-
-
-<ol>
-<li>引入<code>text/template</code>包.</li>
-<li>调用<code>template.New</code>方法根据给定的名称新建模板, 返回一个<code>*template.Template</code>对象.</li>
-<li><code>*template.Template</code>对象的<code>Parse</code>方法接受字符串参数(文本模板内容), 解析并返回解析中遇到的错误.</li>
-<li>调用<code>template.Execute</code>渲染模板, 参数分别为<code>输出对象</code>和<code>指定数据对象</code>, 实现了<code>io.Writer</code>接口的实例都可以作为输出对象.</li>
-</ol>
+1. 引入<code>text/template</code>包.
+2. 调用<code>template.New</code>方法根据给定的名称新建模板, 返回一个<code>*template.Template</code>对象.
+3. <code>*template.Template</code>对象的<code>Parse</code>方法接受字符串参数(文本模板内容), 解析并返回解析中遇到的错误.
+4. 调用<code>template.Execute</code>渲染模板, 参数分别为<code>输出对象</code>和<code>指定数据对象</code>, 实现了<code>io.Writer</code>接口的实例都可以作为输出对象.</p>
 <h3 id="_5">渲染变量</h3>
-<div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
+<p><div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
 
 <span class="kn">import</span> <span class="p">(</span>
     <span class="s">&quot;net/http&quot;</span>
@@ -1166,15 +1164,13 @@
     <span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">ListenAndServe</span><span class="p">(</span><span class="s">&quot;:8000&quot;</span><span class="p">,</span> <span class="kc">nil</span><span class="p">))</span>
 <span class="p">}</span>
 </pre></div>
-
-
-<p><img alt="" src="https://i.loli.net/2019/11/13/uExhkinB1oFXIPG.jpg" /></p>
+<img alt="" src="https://i.loli.net/2019/11/13/uExhkinB1oFXIPG.jpg" /></p>
 <ol>
 <li>HTTP协议通过<code>GET</code>请求获取URL参数(URL中?后的值).</li>
 <li>调用<code>*http.Request</code>对象的<code>URL.QUERY().GET()</code>方法.</li>
 </ol>
 <hr />
-<div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
+<p><div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
 
 <span class="kn">import</span> <span class="p">(</span>
     <span class="s">&quot;fmt&quot;</span>
@@ -1206,15 +1202,13 @@
     <span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">ListenAndServe</span><span class="p">(</span><span class="s">&quot;:8000&quot;</span><span class="p">,</span> <span class="kc">nil</span><span class="p">))</span>
 <span class="p">}</span>
 </pre></div>
-
-
-<p><img alt="" src="https://i.loli.net/2019/11/13/weVXNBl7DfuEron.jpg" /></p>
+<img alt="" src="https://i.loli.net/2019/11/13/weVXNBl7DfuEron.jpg" /></p>
 <ol>
 <li>模板内容修改成<code>The value is : {{.}}</code>, 用了<code>分隔符</code>将<code>.</code>操作符包裹起来,<code>.</code>操作符默认指向<code>根对象</code>, 即<code>template.Execute</code>中的第二个参数.</li>
 <li>在<code>template.Execute</code>方法中传入<code>val</code>, <code>.</code>操作符渲染该变量<code>val</code>实现动态输出.</li>
 </ol>
 <h3 id="_6">渲染复杂对象</h3>
-<div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
+<p><div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
 
 <span class="kn">import</span> <span class="p">(</span>
     <span class="s">&quot;fmt&quot;</span>
@@ -1266,22 +1260,16 @@
     <span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">ListenAndServe</span><span class="p">(</span><span class="s">&quot;:8000&quot;</span><span class="p">,</span> <span class="kc">nil</span><span class="p">))</span>
 <span class="p">}</span>
 </pre></div>
-
-
-<p><img alt="" src="https://i.loli.net/2019/11/14/3iETWXcjaf5A7R6.jpg" /></p>
+<img alt="" src="https://i.loli.net/2019/11/14/3iETWXcjaf5A7R6.jpg" /></p>
 <ol>
-<li><code>template.Execute</code>的第二个参数类型为<code>interface{}</code>, 可以传入任何类型的参数.</li>
-</ol>
+<li><code>template.Execute</code>的第二个参数类型为<code>interface{}</code>, 可以传入任何类型的参数.
 <div class="codehilite"><pre><span></span><span class="kd">func</span> <span class="p">(</span><span class="nx">t</span> <span class="o">*</span><span class="nx">Template</span><span class="p">)</span> <span class="nx">Execute</span><span class="p">(</span><span class="nx">wr</span> <span class="nx">io</span><span class="p">.</span><span class="nx">Writer</span><span class="p">,</span> <span class="nx">data</span> <span class="kd">interface</span><span class="p">{})</span> <span class="kt">error</span> <span class="p">{</span>
     <span class="k">if</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">t</span><span class="p">.</span><span class="nx">escape</span><span class="p">();</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
         <span class="k">return</span> <span class="nx">err</span>
     <span class="p">}</span>
     <span class="k">return</span> <span class="nx">t</span><span class="p">.</span><span class="nx">text</span><span class="p">.</span><span class="nx">Execute</span><span class="p">(</span><span class="nx">wr</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span>
 <span class="p">}</span>
-</pre></div>
-
-
-<ol>
+</pre></div></li>
 <li><code>http/template</code>会根据传入的<code>根对象</code>进行底层类型分析, 自动识别变量, 此时的<code>.</code>操作符代表<code>inventory</code>结构体, 因此可以调用<code>inventory</code>的各个属性.</li>
 <li>在<code>Parse</code>的时候用反引号``将结构体包起来.</li>
 </ol>
@@ -1300,9 +1288,8 @@
 <span class="s">        `</span><span class="p">)</span>
 </pre></div>
 
-
 <h3 id="map">map类型作为模板跟对象</h3>
-<div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
+<p><div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
 
 <span class="kn">import</span> <span class="p">(</span>
     <span class="s">&quot;fmt&quot;</span>
@@ -1348,26 +1335,18 @@
     <span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">ListenAndServe</span><span class="p">(</span><span class="s">&quot;localhost:8000&quot;</span><span class="p">,</span> <span class="kc">nil</span><span class="p">))</span>
 <span class="p">}</span>
 </pre></div>
-
-
-<ol>
-<li>传递给<code>Execute</code>一个<code>map[string]interface{}</code>作为模板对象,可以传入任意类型的值, 将结构体的所有值都传入.</li>
-<li>不再需要单独创建实例, 只需要通过<code>r.URL.Query().Get(valName)</code>获取URL查询参数的值.</li>
-<li>其中数值需要用到<code>strconv.ParseInt/ParseFloat</code>进行转化</li>
-</ol>
+1. 传递给<code>Execute</code>一个<code>map[string]interface{}</code>作为模板对象,可以传入任意类型的值, 将结构体的所有值都传入.
+2. 不再需要单独创建实例, 只需要通过<code>r.URL.Query().Get(valName)</code>获取URL查询参数的值.
+3. 其中数值需要用到<code>strconv.ParseInt/ParseFloat</code>进行转化</p>
 <h3 id="_8">注释</h3>
-<div class="codehilite"><pre><span></span><span class="nx">tmpl</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">template</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">).</span><span class="nx">Parse</span><span class="p">(</span><span class="s">`Inventory{{/* 打印参数的值 */}}</span>
+<p><div class="codehilite"><pre><span></span><span class="nx">tmpl</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">template</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;test&quot;</span><span class="p">).</span><span class="nx">Parse</span><span class="p">(</span><span class="s">`Inventory{{/* 打印参数的值 */}}</span>
 <span class="s">    SKU: {{.SKU}}</span>
 <span class="s">    Name: {{.Name}}</span>
 <span class="s">    UnitPrice: {{.UnitPrice}}</span>
 <span class="s">    Quantity: {{.Quantity}}</span>
 <span class="s">    `</span><span class="p">)</span>
 </pre></div>
-
-
-<ol>
-<li>通过<code>{{}}</code>双层大括号和<code>/**/</code>括起来的值是注释</li>
-</ol>
+1. 通过<code>{{}}</code>双层大括号和<code>/**/</code>括起来的值是注释</p>
 <h2 id="_9">模板流程</h2>
 <p><img alt="" src="https://i.loli.net/2019/12/20/1XfnymCsSWxUaQh.png" /></p>
 <ol>

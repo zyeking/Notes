@@ -14,6 +14,8 @@
         <link rel="canonical" href="https://zyeking.github.io/Notes/Golang/Project/go-gin-example/05 JWT/">
       
       
+        <meta name="author" content="kingCheung">
+      
       
         <meta name="lang:clipboard.copy" content="复制">
       
@@ -1049,7 +1051,6 @@
 <span class="p">}</span>
 </pre></div>
 
-
 <ul>
 <li>编写Gin中间件，在<code>middleware</code>下新建<code>jwt</code>目录，在其中新建<code>jwt.go</code>文件写入</li>
 </ul>
@@ -1098,7 +1099,6 @@
 <span class="p">}</span>
 </pre></div>
 
-
 <ul>
 <li>获得token，在<code>./models</code>下新建<code>auth.go</code>文件写入</li>
 </ul>
@@ -1121,7 +1121,6 @@
     <span class="k">return</span> <span class="kc">false</span>
 <span class="p">}</span>
 </pre></div>
-
 
 <p>在<code>./api</code>下新建<code>auth.go</code>文件写入</p>
 <div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">api</span>
@@ -1181,7 +1180,6 @@
 <span class="p">}</span>
 </pre></div>
 
-
 <ul>
 <li>修改<code>router.go</code>文件</li>
 </ul>
@@ -1226,7 +1224,6 @@
     <span class="k">return</span> <span class="nx">r</span>
 <span class="p">}</span>
 </pre></div>
-
 
 <ul>
 <li>调用</li>

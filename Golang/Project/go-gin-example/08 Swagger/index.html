@@ -14,6 +14,8 @@
         <link rel="canonical" href="https://zyeking.github.io/Notes/Golang/Project/go-gin-example/08 Swagger/">
       
       
+        <meta name="author" content="kingCheung">
+      
       
         <meta name="lang:clipboard.copy" content="复制">
       
@@ -1036,80 +1038,72 @@
 <h3 id="_1">安装</h3>
 <ol>
 <li>安装swag<code>go get -u github.com/swaggo/swag/cmd/swag</code>，如果没有将<code>$GOROOT/bin</code>添加到<code>$PATH</code>中，则需要将swag的可执行文件移到<code>$GOBIN</code>中</li>
-<li>验证是否安装成功</li>
-</ol>
+<li>验证是否安装成功
 <div class="codehilite"><pre><span></span>$ swag -v 
 swag version v1.6.3
-</pre></div>
-
-
-<ol>
-<li>安装gin-swagger</li>
-</ol>
+</pre></div></li>
+<li>安装gin-swagger
 <div class="codehilite"><pre><span></span>go get -u github.com/swaggo/gin-swagger
 go get -u github.com/swaggo/gin-swagger/swaggerFiles
-</pre></div>
-
-
+</pre></div></li>
+</ol>
 <h3 id="swag">编写swag</h3>
-<div class="codehilite"><pre><span></span><span class="o">//</span> <span class="nv">Response</span> 定义<span class="nv">swag</span>文档返回的结构体
-<span class="nv">type</span> <span class="nv">Response</span> <span class="nv">struct</span> {
-    <span class="nv">Code</span> <span class="nv">int</span>         `<span class="nv">json</span>:<span class="s2">&quot;</span><span class="s">code</span><span class="s2">&quot;</span>`
-    <span class="nv">Msg</span>  <span class="nv">string</span>      `<span class="nv">json</span>:<span class="s2">&quot;</span><span class="s">msg</span><span class="s2">&quot;</span>`
-    <span class="nv">Data</span> <span class="nv">interface</span>{} `<span class="nv">json</span>:<span class="s2">&quot;</span><span class="s">data</span><span class="s2">&quot;</span>`
-}
+<p><div class="codehilite"><pre><span></span><span class="o">//</span><span class="w"> </span><span class="n">Response</span><span class="w"> </span><span class="n">定义swag文档返回的结构体</span><span class="w"></span>
+<span class="n">type</span><span class="w"> </span><span class="n">Response</span><span class="w"> </span><span class="n">struct</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">Code</span><span class="w"> </span><span class="nc">int</span><span class="w">         </span><span class="err">`</span><span class="nl">json</span><span class="p">:</span><span class="ss">&quot;code&quot;</span><span class="err">`</span><span class="w"></span>
+<span class="w">    </span><span class="n">Msg</span><span class="w">  </span><span class="n">string</span><span class="w">      </span><span class="err">`</span><span class="nl">json</span><span class="p">:</span><span class="ss">&quot;msg&quot;</span><span class="err">`</span><span class="w"></span>
+<span class="w">    </span><span class="k">Data</span><span class="w"> </span><span class="n">interface</span><span class="err">{}</span><span class="w"> </span><span class="err">`</span><span class="nl">json</span><span class="p">:</span><span class="ss">&quot;data&quot;</span><span class="err">`</span><span class="w"></span>
+<span class="err">}</span><span class="w"></span>
 
-<span class="o">//</span> <span class="nv">GetArticles</span> 获取多个文章
-<span class="o">//</span> @<span class="nv">Summary</span> 获取多个文章
-<span class="o">//</span> @<span class="nv">Produce</span>  <span class="nv">json</span>
-<span class="o">//</span> @<span class="nv">Param</span> <span class="nv">tag_id</span> <span class="nv">body</span> <span class="nv">int</span> <span class="nv">false</span> <span class="s2">&quot;</span><span class="s">TagID</span><span class="s2">&quot;</span>
-<span class="o">//</span> @<span class="nv">Param</span> <span class="nv">state</span> <span class="nv">body</span> <span class="nv">int</span> <span class="nv">false</span> <span class="s2">&quot;</span><span class="s">State</span><span class="s2">&quot;</span>
-<span class="o">//</span> @<span class="nv">Param</span> <span class="nv">created_by</span> <span class="nv">body</span> <span class="nv">int</span> <span class="nv">false</span> <span class="s2">&quot;</span><span class="s">CreatedBy</span><span class="s2">&quot;</span>
-<span class="o">//</span> @<span class="nv">Success</span> <span class="mi">200</span> {<span class="nv">object</span>} <span class="nv">Response</span>
-<span class="o">//</span> @<span class="nv">Failure</span> <span class="mi">500</span> {<span class="nv">object</span>} <span class="nv">Response</span>
-<span class="o">//</span> @<span class="nv">Router</span> <span class="o">/</span><span class="nv">api</span><span class="o">/</span><span class="nv">v1</span><span class="o">/</span><span class="nv">articles</span> [<span class="nv">get</span>]
-<span class="nv">func</span> <span class="nv">GetArticles</span><span class="ss">(</span><span class="nv">c</span> <span class="o">*</span><span class="nv">gin</span>.<span class="nv">Context</span><span class="ss">)</span> {
-    <span class="nv">data</span> :<span class="o">=</span> <span class="nv">make</span><span class="ss">(</span><span class="nv">map</span>[<span class="nv">string</span>]<span class="nv">interface</span>{}<span class="ss">)</span>
-    <span class="nv">maps</span> :<span class="o">=</span> <span class="nv">make</span><span class="ss">(</span><span class="nv">map</span>[<span class="nv">string</span>]<span class="nv">interface</span>{}<span class="ss">)</span>
-    <span class="nv">valid</span> :<span class="o">=</span> <span class="nv">validation</span>.<span class="nv">Validation</span>{}
+<span class="o">//</span><span class="w"> </span><span class="n">GetArticles</span><span class="w"> </span><span class="n">获取多个文章</span><span class="w"></span>
+<span class="o">//</span><span class="w"> </span><span class="nv">@Summary</span><span class="w"> </span><span class="n">获取多个文章</span><span class="w"></span>
+<span class="o">//</span><span class="w"> </span><span class="nv">@Produce</span><span class="w">  </span><span class="n">json</span><span class="w"></span>
+<span class="o">//</span><span class="w"> </span><span class="nv">@Param</span><span class="w"> </span><span class="n">tag_id</span><span class="w"> </span><span class="n">body</span><span class="w"> </span><span class="nc">int</span><span class="w"> </span><span class="k">false</span><span class="w"> </span><span class="ss">&quot;TagID&quot;</span><span class="w"></span>
+<span class="o">//</span><span class="w"> </span><span class="nv">@Param</span><span class="w"> </span><span class="k">state</span><span class="w"> </span><span class="n">body</span><span class="w"> </span><span class="nc">int</span><span class="w"> </span><span class="k">false</span><span class="w"> </span><span class="ss">&quot;State&quot;</span><span class="w"></span>
+<span class="o">//</span><span class="w"> </span><span class="nv">@Param</span><span class="w"> </span><span class="n">created_by</span><span class="w"> </span><span class="n">body</span><span class="w"> </span><span class="nc">int</span><span class="w"> </span><span class="k">false</span><span class="w"> </span><span class="ss">&quot;CreatedBy&quot;</span><span class="w"></span>
+<span class="o">//</span><span class="w"> </span><span class="nv">@Success</span><span class="w"> </span><span class="mi">200</span><span class="w"> </span><span class="err">{</span><span class="k">object</span><span class="err">}</span><span class="w"> </span><span class="n">Response</span><span class="w"></span>
+<span class="o">//</span><span class="w"> </span><span class="nv">@Failure</span><span class="w"> </span><span class="mi">500</span><span class="w"> </span><span class="err">{</span><span class="k">object</span><span class="err">}</span><span class="w"> </span><span class="n">Response</span><span class="w"></span>
+<span class="o">//</span><span class="w"> </span><span class="nv">@Router</span><span class="w"> </span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v1</span><span class="o">/</span><span class="n">articles</span><span class="w"> </span><span class="o">[</span><span class="n">get</span><span class="o">]</span><span class="w"></span>
+<span class="n">func</span><span class="w"> </span><span class="n">GetArticles</span><span class="p">(</span><span class="n">c</span><span class="w"> </span><span class="o">*</span><span class="n">gin</span><span class="p">.</span><span class="n">Context</span><span class="p">)</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">data</span><span class="w"> </span><span class="err">:</span><span class="o">=</span><span class="w"> </span><span class="n">make</span><span class="p">(</span><span class="k">map</span><span class="o">[</span><span class="n">string</span><span class="o">]</span><span class="n">interface</span><span class="err">{}</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">maps</span><span class="w"> </span><span class="err">:</span><span class="o">=</span><span class="w"> </span><span class="n">make</span><span class="p">(</span><span class="k">map</span><span class="o">[</span><span class="n">string</span><span class="o">]</span><span class="n">interface</span><span class="err">{}</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="n">valid</span><span class="w"> </span><span class="err">:</span><span class="o">=</span><span class="w"> </span><span class="n">validation</span><span class="p">.</span><span class="n">Validation</span><span class="err">{}</span><span class="w"></span>
 
-    <span class="nv">var</span> <span class="nv">state</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
-    <span class="k">if</span> <span class="nv">arg</span> :<span class="o">=</span> <span class="nv">c</span>.<span class="nv">Query</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">state</span><span class="s2">&quot;</span><span class="ss">)</span><span class="c1">; arg != &quot;&quot; {</span>
-        <span class="nv">state</span> <span class="o">=</span> <span class="nv">com</span>.<span class="nv">StrTo</span><span class="ss">(</span><span class="nv">arg</span><span class="ss">)</span>.<span class="nv">MustInt</span><span class="ss">()</span>
-        <span class="nv">maps</span>[<span class="s2">&quot;</span><span class="s">state</span><span class="s2">&quot;</span>] <span class="o">=</span> <span class="nv">state</span>
+<span class="w">    </span><span class="nf">var</span><span class="w"> </span><span class="k">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">arg</span><span class="w"> </span><span class="err">:</span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="p">.</span><span class="n">Query</span><span class="p">(</span><span class="ss">&quot;state&quot;</span><span class="p">);</span><span class="w"> </span><span class="n">arg</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="ss">&quot;&quot;</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">state</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">com</span><span class="p">.</span><span class="n">StrTo</span><span class="p">(</span><span class="n">arg</span><span class="p">).</span><span class="n">MustInt</span><span class="p">()</span><span class="w"></span>
+<span class="w">        </span><span class="n">maps</span><span class="o">[</span><span class="n">&quot;state&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">state</span><span class="w"></span>
 
-        <span class="nv">valid</span>.<span class="nv">Range</span><span class="ss">(</span><span class="nv">state</span>, <span class="mi">0</span>, <span class="mi">1</span>, <span class="s2">&quot;</span><span class="s">state</span><span class="s2">&quot;</span><span class="ss">)</span>.<span class="nv">Message</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">状态只允许0或1</span><span class="s2">&quot;</span><span class="ss">)</span>
-    }
+<span class="w">        </span><span class="n">valid</span><span class="p">.</span><span class="k">Range</span><span class="p">(</span><span class="k">state</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;state&quot;</span><span class="p">).</span><span class="n">Message</span><span class="p">(</span><span class="ss">&quot;状态只允许0或1&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="err">}</span><span class="w"></span>
 
-    <span class="nv">var</span> <span class="nv">tagID</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
-    <span class="k">if</span> <span class="nv">arg</span> :<span class="o">=</span> <span class="nv">c</span>.<span class="nv">Query</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">tag_id</span><span class="s2">&quot;</span><span class="ss">)</span><span class="c1">; arg != &quot;&quot; {</span>
-        <span class="nv">tagID</span> <span class="o">=</span> <span class="nv">com</span>.<span class="nv">StrTo</span><span class="ss">(</span><span class="nv">arg</span><span class="ss">)</span>.<span class="nv">MustInt</span><span class="ss">()</span>
-        <span class="nv">maps</span>[<span class="s2">&quot;</span><span class="s">tag_id</span><span class="s2">&quot;</span>] <span class="o">=</span> <span class="nv">tagID</span>
+<span class="w">    </span><span class="nf">var</span><span class="w"> </span><span class="n">tagID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">-</span><span class="mi">1</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">arg</span><span class="w"> </span><span class="err">:</span><span class="o">=</span><span class="w"> </span><span class="n">c</span><span class="p">.</span><span class="n">Query</span><span class="p">(</span><span class="ss">&quot;tag_id&quot;</span><span class="p">);</span><span class="w"> </span><span class="n">arg</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="ss">&quot;&quot;</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">        </span><span class="n">tagID</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">com</span><span class="p">.</span><span class="n">StrTo</span><span class="p">(</span><span class="n">arg</span><span class="p">).</span><span class="n">MustInt</span><span class="p">()</span><span class="w"></span>
+<span class="w">        </span><span class="n">maps</span><span class="o">[</span><span class="n">&quot;tag_id&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">tagID</span><span class="w"></span>
 
-        <span class="nv">valid</span>.<span class="nv">Min</span><span class="ss">(</span><span class="nv">tagID</span>, <span class="mi">1</span>, <span class="s2">&quot;</span><span class="s">tag_id</span><span class="s2">&quot;</span><span class="ss">)</span>.<span class="nv">Message</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">标签ID必须大于0</span><span class="s2">&quot;</span><span class="ss">)</span>
-    }
+<span class="w">        </span><span class="n">valid</span><span class="p">.</span><span class="nf">Min</span><span class="p">(</span><span class="n">tagID</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="ss">&quot;tag_id&quot;</span><span class="p">).</span><span class="n">Message</span><span class="p">(</span><span class="ss">&quot;标签ID必须大于0&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">    </span><span class="err">}</span><span class="w"></span>
 
-    <span class="nv">code</span> :<span class="o">=</span> <span class="nv">e</span>.<span class="nv">INVALID_PARAMS</span>
-    <span class="k">if</span> <span class="o">!</span><span class="nv">valid</span>.<span class="nv">HasErrors</span><span class="ss">()</span> {
-        <span class="nv">data</span>[<span class="s2">&quot;</span><span class="s">list</span><span class="s2">&quot;</span>] <span class="o">=</span> <span class="nv">models</span>.<span class="nv">GetArticles</span><span class="ss">(</span><span class="nv">util</span>.<span class="nv">GetPage</span><span class="ss">(</span><span class="nv">c</span><span class="ss">)</span>, <span class="nv">setting</span>.<span class="nv">PageSize</span>, <span class="nv">maps</span><span class="ss">)</span>
-        <span class="nv">data</span>[<span class="s2">&quot;</span><span class="s">total</span><span class="s2">&quot;</span>] <span class="o">=</span> <span class="nv">models</span>.<span class="nv">GetTagTotal</span><span class="ss">(</span><span class="nv">maps</span><span class="ss">)</span>
+<span class="w">    </span><span class="n">code</span><span class="w"> </span><span class="err">:</span><span class="o">=</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">INVALID_PARAMS</span><span class="w"></span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="err">!</span><span class="n">valid</span><span class="p">.</span><span class="n">HasErrors</span><span class="p">()</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">data</span><span class="o">[</span><span class="n">&quot;list&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">models</span><span class="p">.</span><span class="n">GetArticles</span><span class="p">(</span><span class="n">util</span><span class="p">.</span><span class="n">GetPage</span><span class="p">(</span><span class="n">c</span><span class="p">),</span><span class="w"> </span><span class="n">setting</span><span class="p">.</span><span class="n">PageSize</span><span class="p">,</span><span class="w"> </span><span class="n">maps</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="k">data</span><span class="o">[</span><span class="n">&quot;total&quot;</span><span class="o">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">models</span><span class="p">.</span><span class="n">GetTagTotal</span><span class="p">(</span><span class="n">maps</span><span class="p">)</span><span class="w"></span>
 
-        <span class="nv">code</span> <span class="o">=</span> <span class="nv">e</span>.<span class="nv">SUCCESS</span>
-    } <span class="k">else</span> {
-        <span class="k">for</span> <span class="nv">_</span>, <span class="nv">err</span> :<span class="o">=</span> <span class="nv">range</span> <span class="nv">valid</span>.<span class="nv">Errors</span> {
-            <span class="nv">log</span>.<span class="nv">Printf</span><span class="ss">(</span><span class="s2">&quot;</span><span class="s">err.key:%s, err.message:%s</span><span class="s2">&quot;</span>, <span class="nv">err</span>.<span class="nv">Key</span>, <span class="nv">err</span>.<span class="nv">Message</span><span class="ss">)</span>
-        }
-    }
-    <span class="nv">c</span>.<span class="nv">JSON</span><span class="ss">(</span><span class="nv">http</span>.<span class="nv">StatusOK</span>, <span class="nv">gin</span>.<span class="nv">H</span>{
-        <span class="s2">&quot;</span><span class="s">code</span><span class="s2">&quot;</span>: <span class="nv">code</span>,
-        <span class="s2">&quot;</span><span class="s">msg</span><span class="s2">&quot;</span>:  <span class="nv">e</span>.<span class="nv">GetMsg</span><span class="ss">(</span><span class="nv">code</span><span class="ss">)</span>,
-        <span class="s2">&quot;</span><span class="s">data</span><span class="s2">&quot;</span>: <span class="nv">data</span>,
-    }<span class="ss">)</span>
-}
+<span class="w">        </span><span class="n">code</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">SUCCESS</span><span class="w"></span>
+<span class="w">    </span><span class="err">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="n">_</span><span class="p">,</span><span class="w"> </span><span class="n">err</span><span class="w"> </span><span class="err">:</span><span class="o">=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="n">valid</span><span class="p">.</span><span class="n">Errors</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">            </span><span class="nf">log</span><span class="p">.</span><span class="n">Printf</span><span class="p">(</span><span class="ss">&quot;err.key:%s, err.message:%s&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">err</span><span class="p">.</span><span class="k">Key</span><span class="p">,</span><span class="w"> </span><span class="n">err</span><span class="p">.</span><span class="n">Message</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="err">}</span><span class="w"></span>
+<span class="w">    </span><span class="err">}</span><span class="w"></span>
+<span class="w">    </span><span class="n">c</span><span class="p">.</span><span class="n">JSON</span><span class="p">(</span><span class="n">http</span><span class="p">.</span><span class="n">StatusOK</span><span class="p">,</span><span class="w"> </span><span class="n">gin</span><span class="p">.</span><span class="n">H</span><span class="err">{</span><span class="w"></span>
+<span class="w">        </span><span class="ss">&quot;code&quot;</span><span class="err">:</span><span class="w"> </span><span class="n">code</span><span class="p">,</span><span class="w"></span>
+<span class="w">        </span><span class="ss">&quot;msg&quot;</span><span class="err">:</span><span class="w">  </span><span class="n">e</span><span class="p">.</span><span class="n">GetMsg</span><span class="p">(</span><span class="n">code</span><span class="p">),</span><span class="w"></span>
+<span class="w">        </span><span class="ss">&quot;data&quot;</span><span class="err">:</span><span class="w"> </span><span class="k">data</span><span class="p">,</span><span class="w"></span>
+<span class="w">    </span><span class="err">}</span><span class="p">)</span><span class="w"></span>
+<span class="err">}</span><span class="w"></span>
 </pre></div>
-
-
-<p>格式</p>
+格式</p>
 <blockquote>
 <p>// @Summary API描述              <br />
 // @Produce json[生成..内容]                     <br />

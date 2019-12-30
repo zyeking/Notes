@@ -14,6 +14,8 @@
         <link rel="canonical" href="https://zyeking.github.io/Notes/Golang/Basic/01 Channel/">
       
       
+        <meta name="author" content="kingCheung">
+      
       
         <meta name="lang:clipboard.copy" content="复制">
       
@@ -1064,8 +1066,7 @@
 </ol>
 <p><code>Mychannel &lt;- element</code>表明了数据（element）发送给了Mychannel</p>
 <ol>
-<li>接受操作：<code>element := &lt;- Mychannel</code></li>
-</ol>
+<li>接受操作：<code>element := &lt;- Mychannel</code>
 <div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
 
 <span class="kn">import</span> <span class="s">&quot;fmt&quot;</span>
@@ -1083,15 +1084,13 @@
 <span class="kd">func</span> <span class="nx">myfunc</span><span class="p">(</span><span class="nx">ch</span> <span class="kd">chan</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="mi">234</span> <span class="o">+</span> <span class="o">&lt;-</span><span class="nx">ch</span><span class="p">)</span>
 <span class="p">}</span>
-</pre></div>
-
-
+</pre></div></li>
+</ol>
 <h2 id="closing-a-channel">Closing a Channel</h2>
 <ol>
 <li><code>close()</code>
 这是一个内置函数，设了一个表示表明不会再有值发送给该channel。</li>
-<li><code>ele, ok = &lt;- Mychannel</code>通过循环，接受者会检查该channel是打开的还是关闭的，如果ok是真，则意味着该channel是打开的。</li>
-</ol>
+<li><code>ele, ok = &lt;- Mychannel</code>通过循环，接受者会检查该channel是打开的还是关闭的，如果ok是真，则意味着该channel是打开的。
 <div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
 
 <span class="kn">import</span> <span class="s">&quot;fmt&quot;</span>
@@ -1116,9 +1115,8 @@
     <span class="p">}</span>
     <span class="nb">close</span><span class="p">(</span><span class="nx">mychnl</span><span class="p">)</span>
 <span class="p">}</span>
-</pre></div>
-
-
+</pre></div></li>
+</ol>
 <h2 id="blocking-send-and-receive">Blocking Send and Receive</h2>
 <p>在channel中，当数据发送给一个channel，直到另外的goroutine读取这个channel前，发送的声明是被阻塞的（发送完后必须等待该信息被读取才能够继续发送）。同样的，当一个channel接受数据的时候在接收到数据前都是被阻塞的。</p>
 <p>channel中的零值是<code>nil</code>。</p>
@@ -1143,9 +1141,8 @@
 <span class="p">}</span>
 </pre></div>
 
-
 <h2 id="length-of-the-channel">Length of the Channel</h2>
-<p><code>len()</code>表明在channel缓冲区中==值的数量==</p>
+<p><code>len()</code>表明在channel缓冲区中==值的数量==
 <div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
 
 <span class="kn">import</span> <span class="s">&quot;fmt&quot;</span>
@@ -1159,11 +1156,9 @@
 
     <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Length of the channel is:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="nx">mychnl</span><span class="p">))</span>
 <span class="p">}</span>
-</pre></div>
-
-
+</pre></div></p>
 <h2 id="capacity-of-the-channel">Capacity of the Channel</h2>
-<p><code>cap()</code>表明channel缓冲区的大小</p>
+<p><code>cap()</code>表明channel缓冲区的大小
 <div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
 
 <span class="kn">import</span> <span class="s">&quot;fmt&quot;</span>
@@ -1176,7 +1171,7 @@
 
     <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Capacity of the channel is:&quot;</span><span class="p">,</span> <span class="nb">cap</span><span class="p">(</span><span class="nx">mychnl</span><span class="p">))</span>
 <span class="p">}</span>
-</pre></div>
+</pre></div></p>
                 
                   
                 

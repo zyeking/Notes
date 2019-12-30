@@ -14,6 +14,8 @@
         <link rel="canonical" href="https://zyeking.github.io/Notes/Golang/Go-Web/01 HTTPServe/">
       
       
+        <meta name="author" content="kingCheung">
+      
       
         <meta name="lang:clipboard.copy" content="复制">
       
@@ -1083,7 +1085,7 @@
                 
                 <h1 id="01http">01：建立HTTP服务器的多种方法</h1>
 <h2 id="_1">建立服务器</h2>
-<div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">mian</span>
+<p><div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">mian</span>
 
 <span class="kn">import</span> <span class="p">(</span>
     <span class="s">&quot;log&quot;</span>
@@ -1098,32 +1100,28 @@
     <span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">ListenAndServe</span><span class="p">(</span><span class="s">&quot;:8000&quot;</span><span class="p">,</span> <span class="kc">nil</span><span class="p">))</span>
 <span class="p">}</span>
 </pre></div>
-
-
-<p><img alt="" src="https://i.loli.net/2019/11/11/4pTASLnM5DOZceq.jpg" /></p>
+<img alt="" src="https://i.loli.net/2019/11/11/4pTASLnM5DOZceq.jpg" /></p>
 <ol>
 <li><code>http.HandleFunc(pattern string, handler func(ResponseWriter, *Request)</code> 根据一个==路由规则==绑定一个执行函数, 当用户访问到指定路由时执行.</li>
 <li><code>http.HandleFunc</code>的第二个参数必须符合函数签名<code>func(http.ResponseWriter, *http.Request)</code>, 第一个参数是请求所对应的响应对象<code>http.ResponseWriter</code>,包含响应码、响应头和响应体, 在这里通过调用<code>响应对象</code>的<code>Write</code>方法像响应体写入字符串. 第二个参数是请求所对应的请求对象<code>*http.Request</code>,包含请求头、请求体等.</li>
 <li><code>http.ListenAndServe</code>启动HTTP服务器,监听<code>指定地址</code>和<code>端口号</code>的HTTP请求</li>
-<li><code>http.HandleFunc</code>将传入的<code>绑定函数</code>转换为类型<code>http.HandleFunc</code>(一个HTTP请求处理器对象),该对象类型实现<code>http.Handler</code>接口,接口方法调用自己</li>
-</ol>
-<div class="codehilite"><pre><span></span><span class="o">//</span> <span class="nv">net</span><span class="o">/</span><span class="nv">http</span><span class="o">/</span><span class="nv">server</span>.<span class="nv">go</span>
-<span class="o">//</span> <span class="nv">The</span> <span class="nv">HandlerFunc</span> <span class="nv">type</span> <span class="nv">is</span> <span class="nv">an</span> <span class="nv">adapter</span> <span class="nv">to</span> <span class="nv">allow</span> <span class="nv">the</span> <span class="nv">use</span> <span class="nv">of</span>
-<span class="o">//</span> <span class="nv">ordinary</span> <span class="nv">functions</span> <span class="nv">as</span> <span class="nv">HTTP</span> <span class="nv">handlers</span>. <span class="k">If</span> <span class="nv">f</span> <span class="nv">is</span> <span class="nv">a</span> <span class="nv">function</span>
-<span class="o">//</span> <span class="nv">with</span> <span class="nv">the</span> <span class="nv">appropriate</span> <span class="nv">signature</span>, <span class="nv">HandlerFunc</span><span class="ss">(</span><span class="nv">f</span><span class="ss">)</span> <span class="nv">is</span> <span class="nv">a</span>
-<span class="o">//</span> <span class="nv">Handler</span> <span class="nv">that</span> <span class="nv">calls</span> <span class="nv">f</span>.
-<span class="nv">type</span> <span class="nv">HandlerFunc</span> <span class="nv">func</span><span class="ss">(</span><span class="nv">ResponseWriter</span>, <span class="o">*</span><span class="nv">Request</span><span class="ss">)</span>
+<li><code>http.HandleFunc</code>将传入的<code>绑定函数</code>转换为类型<code>http.HandleFunc</code>(一个HTTP请求处理器对象),该对象类型实现<code>http.Handler</code>接口,接口方法调用自己
+<div class="codehilite"><pre><span></span><span class="o">//</span><span class="w"> </span><span class="n">net</span><span class="o">/</span><span class="n">http</span><span class="o">/</span><span class="n">server</span><span class="p">.</span><span class="k">go</span><span class="w"></span>
+<span class="o">//</span><span class="w"> </span><span class="n">The</span><span class="w"> </span><span class="n">HandlerFunc</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="n">adapter</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">allow</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="k">use</span><span class="w"> </span><span class="k">of</span><span class="w"></span>
+<span class="o">//</span><span class="w"> </span><span class="n">ordinary</span><span class="w"> </span><span class="n">functions</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">HTTP</span><span class="w"> </span><span class="n">handlers</span><span class="p">.</span><span class="w"> </span><span class="k">If</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">function</span><span class="w"></span>
+<span class="o">//</span><span class="w"> </span><span class="k">with</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">appropriate</span><span class="w"> </span><span class="n">signature</span><span class="p">,</span><span class="w"> </span><span class="n">HandlerFunc</span><span class="p">(</span><span class="n">f</span><span class="p">)</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">a</span><span class="w"></span>
+<span class="o">//</span><span class="w"> </span><span class="n">Handler</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">calls</span><span class="w"> </span><span class="n">f</span><span class="p">.</span><span class="w"></span>
+<span class="n">type</span><span class="w"> </span><span class="n">HandlerFunc</span><span class="w"> </span><span class="n">func</span><span class="p">(</span><span class="n">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">Request</span><span class="p">)</span><span class="w"></span>
 
-<span class="o">//</span> <span class="nv">ServeHTTP</span> <span class="nv">calls</span> <span class="nv">f</span><span class="ss">(</span><span class="nv">w</span>, <span class="nv">r</span><span class="ss">)</span>.
-<span class="nv">func</span> <span class="ss">(</span><span class="nv">f</span> <span class="nv">HandlerFunc</span><span class="ss">)</span> <span class="nv">ServeHTTP</span><span class="ss">(</span><span class="nv">w</span> <span class="nv">ResponseWriter</span>, <span class="nv">r</span> <span class="o">*</span><span class="nv">Request</span><span class="ss">)</span> {
-    <span class="nv">f</span><span class="ss">(</span><span class="nv">w</span>, <span class="nv">r</span><span class="ss">)</span>
-}
+<span class="o">//</span><span class="w"> </span><span class="n">ServeHTTP</span><span class="w"> </span><span class="n">calls</span><span class="w"> </span><span class="n">f</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="w"> </span><span class="n">r</span><span class="p">).</span><span class="w"></span>
+<span class="n">func</span><span class="w"> </span><span class="p">(</span><span class="n">f</span><span class="w"> </span><span class="n">HandlerFunc</span><span class="p">)</span><span class="w"> </span><span class="n">ServeHTTP</span><span class="p">(</span><span class="n">w</span><span class="w"> </span><span class="n">ResponseWriter</span><span class="p">,</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="o">*</span><span class="n">Request</span><span class="p">)</span><span class="w"> </span><span class="err">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">f</span><span class="p">(</span><span class="n">w</span><span class="p">,</span><span class="w"> </span><span class="n">r</span><span class="p">)</span><span class="w"></span>
+<span class="err">}</span><span class="w"></span>
 </pre></div>
-
-
-<p><img alt="流程图" src="https://i.loli.net/2019/12/20/Ny9p6MBJrWzL7Hd.png" /></p>
+<img alt="流程图" src="https://i.loli.net/2019/12/20/Ny9p6MBJrWzL7Hd.png" /></li>
+</ol>
 <h2 id="handler">自定义Handler</h2>
-<div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
+<p><div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
 <span class="kn">import</span> <span class="p">(</span>
     <span class="s">&quot;log&quot;</span>
     <span class="s">&quot;net/http&quot;</span>
@@ -1142,9 +1140,7 @@
     <span class="nx">log</span><span class="p">.</span><span class="nx">Fatl</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">ListenAndServe</span><span class="p">(</span><span class="s">&quot;:8000&quot;</span><span class="p">,</span> <span class="kc">nil</span><span class="p">))</span>
 <span class="p">}</span>
 </pre></div>
-
-
-<p><img alt="" src="https://i.loli.net/2019/11/12/goP7jr2Rxik1wTs.jpg" /></p>
+<img alt="" src="https://i.loli.net/2019/11/12/goP7jr2Rxik1wTs.jpg" /></p>
 <ol>
 <li>自定义类型<code>type customHandler{}</code></li>
 <li>类型绑定<code>ServerHTTP(w http.ResponseWriter, r *http.Request)</code>方法</li>
@@ -1155,7 +1151,7 @@
 <p>少了将绑定函数转换为<code>type HandleFunc</code>的步骤</p>
 </blockquote>
 <h2 id="servemux">服务复用器(ServeMux)</h2>
-<div class="codehilite"><pre><span></span><span class="c1">// ListenAndServe listens on the TCP network address addr and then calls</span>
+<p><div class="codehilite"><pre><span></span><span class="c1">// ListenAndServe listens on the TCP network address addr and then calls</span>
 <span class="c1">// Serve with handler to handle requests on incoming connections.</span>
 <span class="c1">// Accepted connections are configured to enable TCP keep-alives.</span>
 <span class="c1">//</span>
@@ -1171,13 +1167,9 @@
     <span class="nx">ServeHTTP</span><span class="p">(</span><span class="nx">ResponseWriter</span><span class="p">,</span> <span class="o">*</span><span class="nx">Request</span><span class="p">)</span>
 <span class="p">}</span>
 </pre></div>
-
-
-<ol>
-<li>实例中<code>http.ListenAndServe</code>的nil替代了实现了<code>http.Handler</code>接口的对象</li>
-<li><code>http.Handler</code>实现<code>ServeHTTP</code>接口</li>
-<li><mark>缺陷</mark> 该方法不能像之前调用的<code>http.HandleFunc</code>和<code>http.Handle</code>为不同路由规则绑定不同的函数处理</li>
-</ol>
+1. 实例中<code>http.ListenAndServe</code>的nil替代了实现了<code>http.Handler</code>接口的对象
+2. <code>http.Handler</code>实现<code>ServeHTTP</code>接口
+3. <mark>缺陷</mark> 该方法不能像之前调用的<code>http.HandleFunc</code>和<code>http.Handle</code>为不同路由规则绑定不同的函数处理
 <div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
 
 <span class="kn">import</span> <span class="p">(</span>
@@ -1195,9 +1187,7 @@
     <span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">ListenAndServe</span><span class="p">(</span><span class="s">&quot;:8000&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="nx">customHandler</span><span class="p">{}))</span>
 <span class="p">}</span>
 </pre></div>
-
-
-<p><img alt="" src="https://i.loli.net/2019/11/12/PAH98iMlEQqIokG.jpg" /></p>
+<img alt="" src="https://i.loli.net/2019/11/12/PAH98iMlEQqIokG.jpg" /></p>
 <h3 id="serve-mux">自定义Serve Mux</h3>
 <div class="codehilite"><pre><span></span><span class="c1">// HandleFunc registers the handler function for the given pattern</span>
 <span class="c1">// in the DefaultServeMux.</span>
@@ -1219,12 +1209,10 @@
 <span class="p">}</span>
 </pre></div>
 
-
 <ol>
 <li><code>handle.Handle</code>调用<code>DefaultServeMux</code>,该<code>DefaultMux</code>是<code>http.ServeMux</code>的封装</li>
 <li><code>http.ServeMux</code>带有基本路由功能的服务复用器(Serve Multiplexer)</li>
-<li>通过<code>http.NewServeMux</code>操作<code>http.ServeMux</code>对象, 调用<code>http.NewServeMux</code>的<code>.Handle</code>方法</li>
-</ol>
+<li>通过<code>http.NewServeMux</code>操作<code>http.ServeMux</code>对象, 调用<code>http.NewServeMux</code>的<code>.Handle</code>方法
 <div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
 
 <span class="kn">import</span> <span class="p">(</span>
@@ -1245,9 +1233,8 @@
     <span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="nx">http</span><span class="p">.</span><span class="nx">ListenAndServe</span><span class="p">(</span><span class="s">&quot;:8000&quot;</span><span class="p">,</span> <span class="nx">mux</span><span class="p">))</span>
 <span class="p">}</span>
 </pre></div>
-
-
-<p><img alt="" src="https://i.loli.net/2019/11/12/ZdqBuKPvrohxOGg.jpg" /> </p>
+<img alt="" src="https://i.loli.net/2019/11/12/ZdqBuKPvrohxOGg.jpg" /> </li>
+</ol>
 <h2 id="server">服务器对象(Server)</h2>
 <div class="codehilite"><pre><span></span><span class="kd">func</span> <span class="nx">ListenAndServe</span><span class="p">(</span><span class="nx">addr</span> <span class="kt">string</span><span class="p">,</span> <span class="nx">handler</span> <span class="nx">Handler</span><span class="p">)</span> <span class="kt">error</span> <span class="p">{</span>
     <span class="nx">server</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">Server</span><span class="p">{</span><span class="nx">Addr</span><span class="p">:</span> <span class="nx">addr</span><span class="p">,</span> <span class="nx">Handler</span><span class="p">:</span> <span class="nx">handler</span><span class="p">}</span>
@@ -1261,11 +1248,9 @@
 <span class="p">}</span>
 </pre></div>
 
-
 <h3 id="server1">自定义server1</h3>
 <ol>
-<li>调用<code>http.ListenAndServe</code>的时候创建了另一个<code>http.Serve</code>对象</li>
-</ol>
+<li>调用<code>http.ListenAndServe</code>的时候创建了另一个<code>http.Serve</code>对象
 <div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
 
 <span class="kn">import</span> <span class="p">(</span>
@@ -1291,11 +1276,10 @@
     <span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="nx">serve</span><span class="p">.</span><span class="nx">ListenAndServe</span><span class="p">())</span>
 <span class="p">}</span>
 </pre></div>
-
-
-<p><img alt="" src="https://i.loli.net/2019/11/12/PlSst4cpn8RxgUZ.jpg" /></p>
+<img alt="" src="https://i.loli.net/2019/11/12/PlSst4cpn8RxgUZ.jpg" /></li>
+</ol>
 <h3 id="server2">自定义server2</h3>
-<div class="codehilite"><pre><span></span><span class="c1">// custome server 2</span>
+<p><div class="codehilite"><pre><span></span><span class="c1">// custome server 2</span>
 <span class="kn">package</span> <span class="nx">main</span>
 
 <span class="kn">import</span> <span class="p">(</span>
@@ -1328,12 +1312,8 @@
     <span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="nx">server</span><span class="p">.</span><span class="nx">ListenAndServe</span><span class="p">())</span>
 <span class="p">}</span>
 </pre></div>
-
-
-<ol>
-<li>无法访问到<code>localhost:8000/timeout</code></li>
-<li>执行函数休眠2秒, 被<code>http.Serve</code>对象认为已经超时,提前关闭与客户端之间的连接, 后面无法像响应体写入任何信息</li>
-</ol>
+1. 无法访问到<code>localhost:8000/timeout</code>
+2. 执行函数休眠2秒, 被<code>http.Serve</code>对象认为已经超时,提前关闭与客户端之间的连接, 后面无法像响应体写入任何信息</p>
 <p><img alt="" src="https://i.loli.net/2019/11/12/iV1bDI2KU3RMQdz.jpg" />
 <img alt="" src="https://i.loli.net/2019/11/12/K9H3UB2DZ8xVSIT.jpg" /></p>
 <h2 id="_2">优雅地停止服务</h2>
@@ -1342,7 +1322,7 @@
 <li>捕捉<code>os.Interrupt</code>信号(ctrl+c)然后调用<code>server.Shutdown</code>方法g告知服务器停止接受新请求</li>
 <li><code>http.ErrServerClosed</code>根据该错误类型判断服务器是否正常关闭</li>
 </ol>
-<div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
+<p><div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
 
 <span class="kn">import</span> <span class="p">(</span>
     <span class="s">&quot;context&quot;</span>
@@ -1389,9 +1369,7 @@
     <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
-
-
-<p><img alt="" src="https://i.loli.net/2019/11/12/3vZwu7Xce61xfyd.jpg" /></p>
+<img alt="" src="https://i.loli.net/2019/11/12/3vZwu7Xce61xfyd.jpg" /></p>
                 
                   
                 

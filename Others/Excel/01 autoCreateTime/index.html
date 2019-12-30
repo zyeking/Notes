@@ -14,6 +14,8 @@
         <link rel="canonical" href="https://zyeking.github.io/Notes/Others/Excel/01 autoCreateTime/">
       
       
+        <meta name="author" content="kingCheung">
+      
       
         <meta name="lang:clipboard.copy" content="复制">
       
@@ -923,9 +925,8 @@
 <p>此处的<code>C列</code>会自动根据<code>D列</code>数据创建时间，该时间不会根据其他的列改变</p>
 </li>
 </ol>
-<div class="codehilite"><pre><span></span> <span class="nv">excel</span> <span class="o">=</span><span class="k">IF</span><span class="ss">(</span><span class="nv">D2</span><span class="o">=</span><span class="s2">&quot;&quot;</span>,<span class="s2">&quot;&quot;</span>,<span class="k">IF</span><span class="ss">(</span><span class="nv">C2</span><span class="o">=</span><span class="s2">&quot;&quot;</span>,<span class="nv">NOW</span><span class="ss">()</span>,<span class="nv">C2</span><span class="ss">))</span>
+<div class="codehilite"><pre><span></span><span class="err"> excel =IF(D2=&quot;&quot;,&quot;&quot;,IF(C2=&quot;&quot;,NOW(),C2))</span>
 </pre></div>
-
 
 <p><img alt="" src="https://i.loli.net/2019/10/17/gZhRXkd2zKNyvmn.jpg" /></p>
 <p>参考URL：</p>

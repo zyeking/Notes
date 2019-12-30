@@ -14,6 +14,8 @@
         <link rel="canonical" href="https://zyeking.github.io/Notes/Golang/Basic/02 UseDelveDebug/">
       
       
+        <meta name="author" content="kingCheung">
+      
       
         <meta name="lang:clipboard.copy" content="复制">
       
@@ -1022,8 +1024,7 @@
 <h2 id="_2">使用</h2>
 <h3 id="vscode">vscode</h3>
 <ol>
-<li>在vscode中按F5, 弹出<code>launch.json</code>文件, 配置</li>
-</ol>
+<li>在vscode中按F5, 弹出<code>launch.json</code>文件, 配置
 <div class="codehilite"><pre><span></span><span class="p">{</span>
     <span class="err">//</span> <span class="err">Use</span> <span class="err">IntelliSense</span> <span class="err">to</span> <span class="err">learn</span> <span class="err">about</span> <span class="err">possible</span> <span class="err">attributes.</span>
     <span class="err">//</span> <span class="err">Hover</span> <span class="err">to</span> <span class="err">view</span> <span class="err">descriptions</span> <span class="err">of</span> <span class="err">existing</span> <span class="err">attributes.</span>
@@ -1043,11 +1044,10 @@
         <span class="p">}</span>
     <span class="p">]</span>
 <span class="p">}</span>
-</pre></div>
-
-
+</pre></div></li>
+</ol>
 <h3 id="debug">命令行debug</h3>
-<div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
+<p><div class="codehilite"><pre><span></span><span class="kn">package</span> <span class="nx">main</span>
 
 
 <span class="kn">import</span> <span class="p">(</span>
@@ -1068,18 +1068,32 @@
     <span class="nx">router</span><span class="p">.</span><span class="nx">Run</span><span class="p">(</span><span class="s">&quot;:8000&quot;</span><span class="p">)</span>
 <span class="p">}</span>
 </pre></div>
+1. 进入要debug的文件目录<code>cd ../main.go</code>
+<div class="codehilite"><pre><span></span>dlv debug main.go // debug
+b HelloHandler // <span class="nb">break</span> point
+c // <span class="k">continue</span>
+n // next
+s // step in
+p value // print value
+stepout // step out <span class="k">function</span>
+</pre></div></p>
+<div class="codehilite"><pre><span></span><span class="n">st</span><span class="o">=&gt;</span><span class="k">start</span><span class="err">:</span><span class="w"> </span><span class="k">Start</span><span class="err">:</span><span class="o">&gt;</span><span class="nl">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="p">.</span><span class="n">google</span><span class="p">.</span><span class="n">com</span><span class="o">[</span><span class="n">blank</span><span class="o">]</span><span class="w"></span>
+<span class="n">e</span><span class="o">=&gt;</span><span class="k">end</span><span class="err">:</span><span class="o">&gt;</span><span class="nl">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="p">.</span><span class="n">google</span><span class="p">.</span><span class="n">com</span><span class="w"></span>
+<span class="n">op1</span><span class="o">=&gt;</span><span class="k">operation</span><span class="err">:</span><span class="w"> </span><span class="n">My</span><span class="w"> </span><span class="k">Operation</span><span class="w"></span>
+<span class="n">sub1</span><span class="o">=&gt;</span><span class="nl">subroutine</span><span class="p">:</span><span class="w"> </span><span class="n">My</span><span class="w"> </span><span class="n">Subroutine</span><span class="w"></span>
+<span class="n">cond</span><span class="o">=&gt;</span><span class="k">condition</span><span class="err">:</span><span class="w"> </span><span class="n">Yes</span><span class="w"></span>
+<span class="ow">or</span><span class="w"> </span><span class="k">No</span><span class="vm">?</span><span class="err">:</span><span class="o">&gt;</span><span class="nl">http</span><span class="p">:</span><span class="o">//</span><span class="n">www</span><span class="p">.</span><span class="n">google</span><span class="p">.</span><span class="n">com</span><span class="w"></span>
+<span class="n">io</span><span class="o">=&gt;</span><span class="nl">inputoutput</span><span class="p">:</span><span class="w"> </span><span class="k">catch</span><span class="w"> </span><span class="n">something</span><span class="p">...</span><span class="w"></span>
+<span class="n">st</span><span class="o">-&gt;</span><span class="n">op1</span><span class="o">-&gt;</span><span class="n">cond</span><span class="w"></span>
+<span class="n">cond</span><span class="p">(</span><span class="n">yes</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">io</span><span class="o">-&gt;</span><span class="n">e</span><span class="w"></span>
+<span class="n">cond</span><span class="p">(</span><span class="k">no</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">sub1</span><span class="p">(</span><span class="nf">right</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">op1</span><span class="w"></span>
+</pre></div>
 
-
-<ol>
-<li>进入要debug的文件目录<code>cd ../main.go</code></li>
-</ol>
-<div class="codehilite"><pre><span></span>$ dlv debug main.go // debug
-$ b HelloHandler // <span class="nb">break</span> point
-$ c // <span class="k">continue</span>
-$ n // next
-$ s // step in
-$ p value // print value
-$ stepout // step out <span class="k">function</span>
+<div class="codehilite"><pre><span></span><span class="n">Title</span><span class="o">:</span> <span class="n">Here</span> <span class="k">is</span> <span class="n">a</span> <span class="n">title</span>
+<span class="n">A</span><span class="o">-&gt;</span><span class="n">B</span><span class="o">:</span> <span class="n">Normal</span> <span class="n">line</span>
+<span class="n">B</span><span class="o">--&gt;</span><span class="n">C</span><span class="o">:</span> <span class="n">Dashed</span> <span class="n">line</span>
+<span class="n">C</span><span class="o">-&gt;&gt;</span><span class="n">D</span><span class="o">:</span> <span class="n">Open</span> <span class="n">arrow</span>
+<span class="n">D</span><span class="o">--&gt;&gt;</span><span class="n">A</span><span class="o">:</span> <span class="n">Dashed</span> <span class="n">open</span> <span class="n">arrow</span>
 </pre></div>
                 
                   
