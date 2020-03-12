@@ -785,8 +785,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#teminal" class="md-nav__link">
-    优化teminal
+  <a href="#_4" class="md-nav__link">
+    优化终端
   </a>
   
 </li>
@@ -806,7 +806,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     软件
   </a>
   
@@ -825,7 +825,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     其他问题
   </a>
   
@@ -1072,8 +1072,8 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#teminal" class="md-nav__link">
-    优化teminal
+  <a href="#_4" class="md-nav__link">
+    优化终端
   </a>
   
 </li>
@@ -1093,7 +1093,7 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#_4" class="md-nav__link">
+  <a href="#_5" class="md-nav__link">
     软件
   </a>
   
@@ -1112,7 +1112,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#_5" class="md-nav__link">
+  <a href="#_6" class="md-nav__link">
     其他问题
   </a>
   
@@ -1183,20 +1183,23 @@ chsh -s /usr/bin/fish <span class="c1"># 修改默认shell</span>
 fish_config <span class="c1"># shell美化</span>
 </code></pre></div>
 
-<h3 id="teminal">优化teminal</h3>
+<h3 id="_4">优化终端</h3>
+<p>原生终端: 设置透明背景</p>
+<p>simple terminal
 <div class="codehilite"><pre><span></span><code>git clone https://github.com/zyeking/st_config.git
-</code></pre></div>
-
+</code></pre></div></p>
 <h3 id="nvim">配置Nvim</h3>
 <div class="codehilite"><pre><span></span><code>yay -Sy neovim <span class="c1"># 安装</span>
 yay -Sy npm nodejs <span class="c1"># 安装npm和nodejs以安装coc插件</span>
 npm config <span class="nb">set</span> registry https://registry.npm.taobao.org <span class="c1"># 修改npm国内源</span>
 npm config get registry <span class="c1"># 测试</span>
+sudo touch ~/.config/nvim/init.vim <span class="c1"># 创建配置文件</span>
+<span class="nb">cd</span> ~/.config/nvim
 git clone https://github.com/zyeking/nvim.git
 </code></pre></div>
 
 <h3 id="golang">配置Golang</h3>
-<h3 id="_4">软件</h3>
+<h3 id="_5">软件</h3>
 <p>输入法
 <div class="codehilite"><pre><span></span><code>yay -Sy fcitx-sogoupinyin
 yay -Sy fcitx-im
@@ -1236,7 +1239,7 @@ sudo nvim /usr/bin/wps <span class="c1"># 添加以下配置解决无法输入�
 <li>Event Calendar</li>
 <li>Active Window Control</li>
 </ul>
-<h2 id="_5">其他问题</h2>
+<h2 id="_6">其他问题</h2>
 <p><a href="https://blog.csdn.net/a00289/article/details/101656683">解决Manjaro重启壁纸重设问题</a></p>
 <p><a href="https://unix.stackexchange.com/questions/145447/ifconfig-command-not-found">ifconfig指令找不到</a></p>
                 
