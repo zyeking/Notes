@@ -1,0 +1,68 @@
+site_name: kingCheung
+site_author: kingCheung
+site_url: https://zyeking.github.io/Notes/  
+
+theme:
+  name: material
+  language: 'zh'
+  palette:
+    primary: 'Teal'
+    accent: 'Pink'
+  # toc bar  
+  feature:
+    tabs: true
+
+
+markdown_extensions:
+  - pymdownx.superfences
+  - codehilite
+  - meta
+  - pymdownx.mark
+
+
+nav:
+  - index: index.md
+  - Golang:
+    - Basic:
+      - ./Golang/Basic/01 Channel.md
+      - ./Golang/Basic/02 UseDelveDebug.md
+    - Project:
+      - go-gin-example:
+        - ./Golang/Project/go-gin-example/01 Config.md
+        - ./Golang/Project/go-gin-example/02 API-1.md
+        - ./Golang/Project/go-gin-example/03 API-2.md
+        - ./Golang/Project/go-gin-example/04 API-3.md
+        - ./Golang/Project/go-gin-example/05 JWT.md
+        - ./Golang/Project/go-gin-example/08 Swagger.md
+        - ./Golang/Project/go-gin-example/09 Docker.md
+        - ./Golang/Project/go-gin-example/10 GORM-Callback.md
+        - ./Golang/Project/go-gin-example/FlowChart.md
+        - ./Golang/Project/go-gin-example/InterfaceTestInstance.md
+    - Go-Web:
+      - ./Golang/Go-Web/01 HTTPServe.md
+      - ./Golang/Go-Web/02 BasicTemplateUsage.md
+      - ./Golang/Go-Web/03 AdvanceTemplateUsage.md
+    - ErrorCollect:
+      - ./Golang/ErrorCollect/20191127：Cannot fint main module[gomod].md
+  - Python:
+    - ./Python/01 UsingTesseract.md
+    - ./Python/02 dzdianpingSpider.md
+  - Linux:
+    - ./Linux/01 FormattingUdisk.md
+    - ./Linux/02 ChangeSources.md
+    - ./Linux/01 Hello Manjaro.md
+  - Docker:
+    - ./Docker/01 ChangeImageSource.md
+    - ./Docker/02 EntryPointAndCMD.md
+  - Others:
+    - Excel:
+      - ./Others/Excel/01 AutoCreateTime.md
+      - ./Others/Excel/02 AutoCreateTimeByMacro.md
+      - ./Others/Excel/03 FormatUnit.md
+      - ./Others/Excel/04 RepairArrowKey.md
+      - ./Others/Excel/05 MultipleInsertValue.md
+    - ./Others/01 MySql.md
+
+
+
+

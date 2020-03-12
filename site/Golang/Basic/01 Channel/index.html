@@ -1,0 +1,1292 @@
+
+
+
+
+<!doctype html>
+<html lang="zh" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+      
+        <link rel="canonical" href="https://zyeking.github.io/Notes/Golang/Basic/01%20Channel/">
+      
+      
+        <meta name="author" content="kingCheung">
+      
+      
+        <meta name="lang:clipboard.copy" content="复制">
+      
+        <meta name="lang:clipboard.copied" content="已复制">
+      
+        <meta name="lang:search.language" content="ja">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="没有找到符合条件的结果">
+      
+        <meta name="lang:search.result.one" content="找到 1 个符合条件的结果">
+      
+        <meta name="lang:search.result.other" content="# 个符合条件的结果">
+      
+        <meta name="lang:search.tokenizer" content="[\uff0c\u3002]+">
+      
+      <link rel="shortcut icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1, mkdocs-material-4.6.3">
+    
+    
+      
+        <title>channel - kingCheung</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/application.adb8469c.css">
+      
+        <link rel="stylesheet" href="../../../assets/stylesheets/application-palette.a8b3c06d.css">
+      
+      
+        
+        
+        <meta name="theme-color" content="#009688">
+      
+    
+    
+      <script src="../../../assets/javascripts/modernizr.86422ebf.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../../assets/fonts/material-icons.css">
+    
+    
+    
+      
+    
+    
+  </head>
+  
+    
+    
+    <body dir="ltr" data-md-color-primary="teal" data-md-color-accent="pink">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#channel" tabindex="0" class="md-skip">
+        跳转至
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://zyeking.github.io/Notes/" title="kingCheung" aria-label="kingCheung" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              kingCheung
+            </span>
+            <span class="md-header-nav__topic">
+              
+                channel
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" aria-label="search" name="query" placeholder="搜索" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            键入以开始搜索
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+        
+
+  
+
+<nav class="md-tabs md-tabs--active" data-md-component="tabs">
+  <div class="md-tabs__inner md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  <li class="md-tabs__item">
+    
+      <a href="../../.." class="md-tabs__link">
+        index
+      </a>
+    
+  </li>
+
+      
+        
+  
+  
+    
+    
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="./" class="md-tabs__link md-tabs__link--active">
+          Golang
+        </a>
+      
+    </li>
+  
+
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../Python/01%20UsingTesseract/" class="md-tabs__link">
+          Python
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../Linux/01%20FormattingUdisk/" class="md-tabs__link">
+          Linux
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../Docker/01%20ChangeImageSource/" class="md-tabs__link">
+          Docker
+        </a>
+      
+    </li>
+  
+
+      
+        
+  
+  
+    
+    
+  
+  
+    <li class="md-tabs__item">
+      
+        <a href="../../../Others/Excel/01%20AutoCreateTime/" class="md-tabs__link">
+          Others
+        </a>
+      
+    </li>
+  
+
+  
+
+      
+    </ul>
+  </div>
+</nav>
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://zyeking.github.io/Notes/" title="kingCheung" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    kingCheung
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../.." title="index" class="md-nav__link">
+      index
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      Golang
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Golang
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-1" type="checkbox" id="nav-2-1" checked>
+    
+    <label class="md-nav__link" for="nav-2-1">
+      Basic
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-1">
+        Basic
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        channel
+      </label>
+    
+    <a href="./" title="channel" class="md-nav__link md-nav__link--active">
+      channel
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-channel" class="md-nav__link">
+    what is channel
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how" class="md-nav__link">
+    how
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#send-and-receive-data-from-a-channel" class="md-nav__link">
+    Send and Receive Data From a Channel
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#closing-a-channel" class="md-nav__link">
+    Closing a Channel
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blocking-send-and-receive" class="md-nav__link">
+    Blocking Send and Receive
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#length-of-the-channel" class="md-nav__link">
+    Length of the Channel
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#capacity-of-the-channel" class="md-nav__link">
+    Capacity of the Channel
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../02%20UseDelveDebug/" title="使用delve调试Golang" class="md-nav__link">
+      使用delve调试Golang
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-2" type="checkbox" id="nav-2-2">
+    
+    <label class="md-nav__link" for="nav-2-2">
+      Project
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-2">
+        Project
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-2-1" type="checkbox" id="nav-2-2-1">
+    
+    <label class="md-nav__link" for="nav-2-2-1">
+      go-gin-example
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
+      <label class="md-nav__title" for="nav-2-2-1">
+        go-gin-example
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Project/go-gin-example/01%20Config/" title="go-gin-example 01：配置" class="md-nav__link">
+      go-gin-example 01：配置
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Project/go-gin-example/02%20API-1/" title="go-gin-example 02：API-1" class="md-nav__link">
+      go-gin-example 02：API-1
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Project/go-gin-example/03%20API-2/" title="go-gin-example 03：API-2" class="md-nav__link">
+      go-gin-example 03：API-2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Project/go-gin-example/04%20API-3/" title="go-gin-example 04：API-3" class="md-nav__link">
+      go-gin-example 04：API-3
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Project/go-gin-example/05%20JWT/" title="go-gin-example 05：JWT" class="md-nav__link">
+      go-gin-example 05：JWT
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Project/go-gin-example/08%20Swagger/" title="go-gin-example 08： Swagger" class="md-nav__link">
+      go-gin-example 08： Swagger
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Project/go-gin-example/09%20Docker/" title="go-gin-example 09：Docker" class="md-nav__link">
+      go-gin-example 09：Docker
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Project/go-gin-example/10%20GORM-Callback/" title="go-gin-example 10： GORM-Callback" class="md-nav__link">
+      go-gin-example 10： GORM-Callback
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Project/go-gin-example/FlowChart/" title="流程图" class="md-nav__link">
+      流程图
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Project/go-gin-example/InterfaceTestInstance/" title="接口测试实例" class="md-nav__link">
+      接口测试实例
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-3" type="checkbox" id="nav-2-3">
+    
+    <label class="md-nav__link" for="nav-2-3">
+      Go-Web
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-3">
+        Go-Web
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Go-Web/01%20HTTPServe/" title="01：建立HTTP服务器的多种方法" class="md-nav__link">
+      01：建立HTTP服务器的多种方法
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Go-Web/02%20BasicTemplateUsage/" title="02：基础模板" class="md-nav__link">
+      02：基础模板
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Go-Web/03%20AdvanceTemplateUsage/" title="03：进阶模板用法" class="md-nav__link">
+      03：进阶模板用法
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2-4" type="checkbox" id="nav-2-4">
+    
+    <label class="md-nav__link" for="nav-2-4">
+      ErrorCollect
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-2-4">
+        ErrorCollect
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../ErrorCollect/20191127%EF%BC%9ACannot%20fint%20main%20module%5Bgomod%5D/" title="20191127：Cannot fint the main module[gomod]" class="md-nav__link">
+      20191127：Cannot fint the main module[gomod]
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Python
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Python
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Python/01%20UsingTesseract/" title="Tesseract" class="md-nav__link">
+      Tesseract
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Python/02%20dzdianpingSpider/" title="大众点评评价爬取逻辑" class="md-nav__link">
+      大众点评评价爬取逻辑
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Linux
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Linux
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Linux/01%20FormattingUdisk/" title="Linux01: 彻底格式化U盘" class="md-nav__link">
+      Linux01: 彻底格式化U盘
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Linux/02%20ChangeSources/" title="Linux02: 更改Ubuntu源" class="md-nav__link">
+      Linux02: 更改Ubuntu源
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Linux/01%20Hello%20Manjaro/" title="Hello Manjaro" class="md-nav__link">
+      Hello Manjaro
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Docker
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Docker
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Docker/01%20ChangeImageSource/" title="Docker 01：修改镜像源" class="md-nav__link">
+      Docker 01：修改镜像源
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Docker/02%20EntryPointAndCMD/" title="Docker 02：Dockerfile中的ENTRYPOINT、RUN与CMD" class="md-nav__link">
+      Docker 02：Dockerfile中的ENTRYPOINT、RUN与CMD
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      Others
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        Others
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6-1" type="checkbox" id="nav-6-1">
+    
+    <label class="md-nav__link" for="nav-6-1">
+      Excel
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
+      <label class="md-nav__title" for="nav-6-1">
+        Excel
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Others/Excel/01%20AutoCreateTime/" title="1. 自动创建数据时间，不受其他修改影响的`NOW()`" class="md-nav__link">
+      	1. 自动创建数据时间，不受其他修改影响的`NOW()`
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Others/Excel/02%20AutoCreateTimeByMacro/" title="2. 用宏自动创建数据时间" class="md-nav__link">
+      2. 用宏自动创建数据时间
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Others/Excel/03%20FormatUnit/" title="3. 为单元格添加格式" class="md-nav__link">
+      3. 为单元格添加格式
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Others/Excel/04%20RepairArrowKey/" title="4. 方向键无法控制excel表格上下、左右移动" class="md-nav__link">
+      4. 方向键无法控制excel表格上下、左右移动
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Others/Excel/05%20MultipleInsertValue/" title="5. 将单元格的空值换成目标值" class="md-nav__link">
+      5. 将单元格的空值换成目标值
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Others/01%20MySql/" title="使用Mysql" class="md-nav__link">
+      使用Mysql
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#what-is-channel" class="md-nav__link">
+    what is channel
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how" class="md-nav__link">
+    how
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#send-and-receive-data-from-a-channel" class="md-nav__link">
+    Send and Receive Data From a Channel
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#closing-a-channel" class="md-nav__link">
+    Closing a Channel
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#blocking-send-and-receive" class="md-nav__link">
+    Blocking Send and Receive
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#length-of-the-channel" class="md-nav__link">
+    Length of the Channel
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#capacity-of-the-channel" class="md-nav__link">
+    Capacity of the Channel
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="channel">channel</h1>
+<h2 id="what-is-channel">what is channel</h2>
+<p>channel是goroutine和goroutine之间无锁交流的【媒介】，换句话说，channel是一种允许一个goroutine发送数据给另外一个goroutine的技术，默认的channel是双向的，意味着goroutines可以通过同一个channel发、收数据。</p>
+<p><img alt="1 _1_.jpg" src="https://i.loli.net/2019/12/18/MnwWGTqEVQeydzp.jpg" /></p>
+<h2 id="how">how</h2>
+<ul>
+<li>syntax<ul>
+<li><code>var Channel_name chan Type</code></li>
+<li><code>channel_name := make(chan Type)</code></li>
+</ul>
+</li>
+</ul>
+<p>在golang中, 我们用关键字<code>Channel_name chan Type</code>创建某种类型的channel，其中channel仅仅可以传递同种类型的数据，不同类型的数据不可以通过一个类型的channel传递。</p>
+<h2 id="send-and-receive-data-from-a-channel">Send and Receive Data From a Channel</h2>
+<p>在golang中，channel主要有两个操作，一个是<code>sending</code>，一个是<code>receiving</code>，这两种操作被称为通讯。<code>&lt;-</code>箭头的方向表明是发送数据还是接受数据。在默认情况下，channel中的发送、接受操作块【直到另一端未就绪】
+，允许goroutine之间在没有显式锁或者条件变量的时候互相同步</p>
+<ol>
+<li>发送操作：在channel的帮助下用来将goroutine的数据发送给另外一个goroutine，通过channel发送<code>float64</code>，<code>int</code>，<code>bool</code>是安全切容易的，因为这些值会被<code>拷贝</code>一份，不会有意外并发的风险，同样的，<code>strings</code>类型也是安全的，因为它是<code>immutable（不可更改）</code>。在发送<code>pointers</code>或者<code>slice</code>，<code>map</code>等引用的时候，channel是不安全的，因为指针或者引用会被发送者或者接收者在同一时间修改，结果是不可预知的，因此需要==确保只有一个goroutine能够访问==</li>
+</ol>
+<p><code>Mychannel &lt;- element</code>表明了数据（element）发送给了Mychannel</p>
+<ol>
+<li>接受操作：<code>element := &lt;- Mychannel</code>
+<div class="codehilite"><pre><span></span><code><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="s">&quot;fmt&quot;</span>
+
+<span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;starting Main method&quot;</span><span class="p">)</span>
+
+    <span class="nx">ch</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="kt">int</span><span class="p">)</span>
+
+    <span class="k">go</span> <span class="nx">myfunc</span><span class="p">(</span><span class="nx">ch</span><span class="p">)</span>
+    <span class="nx">ch</span> <span class="o">&lt;-</span> <span class="mi">23</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;End Main method&quot;</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nx">myfunc</span><span class="p">(</span><span class="nx">ch</span> <span class="kd">chan</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="mi">234</span> <span class="o">+</span> <span class="o">&lt;-</span><span class="nx">ch</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ol>
+<h2 id="closing-a-channel">Closing a Channel</h2>
+<ol>
+<li><code>close()</code>
+这是一个内置函数，设了一个表示表明不会再有值发送给该channel。</li>
+<li><code>ele, ok = &lt;- Mychannel</code>通过循环，接受者会检查该channel是打开的还是关闭的，如果ok是真，则意味着该channel是打开的。
+<div class="codehilite"><pre><span></span><code><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="s">&quot;fmt&quot;</span>
+
+<span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">c</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="kt">string</span><span class="p">)</span>
+    <span class="c1">// 调用goroutine</span>
+    <span class="k">go</span> <span class="nx">myFunc</span><span class="p">(</span><span class="nx">c</span><span class="p">)</span>
+    <span class="k">for</span> <span class="p">{</span>
+        <span class="nx">res</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="o">&lt;-</span><span class="nx">c</span>
+        <span class="k">if</span> <span class="nx">ok</span> <span class="o">==</span> <span class="kc">false</span> <span class="p">{</span>
+            <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Channel Close&quot;</span><span class="p">,</span> <span class="nx">ok</span><span class="p">)</span>
+            <span class="k">break</span>
+        <span class="p">}</span>
+        <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Channel Open&quot;</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">ok</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nx">myFunc</span><span class="p">(</span><span class="nx">mychnl</span> <span class="kd">chan</span> <span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="nx">v</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">v</span> <span class="p">&lt;</span> <span class="mi">4</span><span class="p">;</span> <span class="nx">v</span><span class="o">++</span> <span class="p">{</span>
+        <span class="nx">mychnl</span> <span class="o">&lt;-</span> <span class="s">&quot;GeeksforGeeks&quot;</span>
+    <span class="p">}</span>
+    <span class="nb">close</span><span class="p">(</span><span class="nx">mychnl</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></li>
+</ol>
+<h2 id="blocking-send-and-receive">Blocking Send and Receive</h2>
+<p>在channel中，当数据发送给一个channel，直到另外的goroutine读取这个channel前，发送的声明是被阻塞的（发送完后必须等待该信息被读取才能够继续发送）。同样的，当一个channel接受数据的时候在接收到数据前都是被阻塞的。</p>
+<p>channel中的零值是<code>nil</code>。</p>
+<p><code>for</code>循环可以迭代channel中所有连续的值，直到该channel。</p>
+<div class="codehilite"><pre><span></span><code><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="s">&quot;fmt&quot;</span>
+
+<span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">mychnl</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="kt">string</span><span class="p">)</span>
+    <span class="k">go</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+        <span class="nx">mychnl</span> <span class="o">&lt;-</span> <span class="s">&quot;GFG&quot;</span>
+        <span class="nx">mychnl</span> <span class="o">&lt;-</span> <span class="s">&quot;ABC&quot;</span>
+        <span class="nx">mychnl</span> <span class="o">&lt;-</span> <span class="s">&quot;ASDJH&quot;</span>
+        <span class="nx">mychnl</span> <span class="o">&lt;-</span> <span class="s">&quot;asdjjak&quot;</span>
+        <span class="nb">close</span><span class="p">(</span><span class="nx">mychnl</span><span class="p">)</span>
+    <span class="p">}()</span>
+
+    <span class="k">for</span> <span class="nx">res</span> <span class="o">:=</span> <span class="k">range</span> <span class="nx">mychnl</span> <span class="p">{</span>
+        <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="nx">res</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h2 id="length-of-the-channel">Length of the Channel</h2>
+<p><code>len()</code>表明在channel缓冲区中==值的数量==
+<div class="codehilite"><pre><span></span><code><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="s">&quot;fmt&quot;</span>
+
+<span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">mychnl</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="kt">string</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+    <span class="nx">mychnl</span> <span class="o">&lt;-</span> <span class="s">&quot;GFG&quot;</span>
+    <span class="nx">mychnl</span> <span class="o">&lt;-</span> <span class="s">&quot;ABC&quot;</span>
+    <span class="nx">mychnl</span> <span class="o">&lt;-</span> <span class="s">&quot;ASDJH&quot;</span>
+    <span class="nx">mychnl</span> <span class="o">&lt;-</span> <span class="s">&quot;asdjjak&quot;</span>
+
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Length of the channel is:&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="nx">mychnl</span><span class="p">))</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<h2 id="capacity-of-the-channel">Capacity of the Channel</h2>
+<p><code>cap()</code>表明channel缓冲区的大小
+<div class="codehilite"><pre><span></span><code><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="s">&quot;fmt&quot;</span>
+
+<span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">mychnl</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="kt">string</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+    <span class="nx">mychnl</span> <span class="o">&lt;-</span> <span class="s">&quot;GFG&quot;</span>
+    <span class="nx">mychnl</span> <span class="o">&lt;-</span> <span class="s">&quot;ABC&quot;</span>
+    <span class="nx">mychnl</span> <span class="o">&lt;-</span> <span class="s">&quot;ASDJH&quot;</span>
+
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">&quot;Capacity of the channel is:&quot;</span><span class="p">,</span> <span class="nb">cap</span><span class="p">(</span><span class="nx">mychnl</span><span class="p">))</span>
+<span class="p">}</span>
+</code></pre></div></p>
+                
+                  
+                
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../../.." title="index" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  上一页
+                </span>
+                index
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../02%20UseDelveDebug/" title="使用delve调试Golang" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  下一页
+                </span>
+                使用delve调试Golang
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org" target="_blank" rel="noopener">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../assets/javascripts/application.c33a9706.js"></script>
+      
+        
+        
+          
+          <script src="../../../assets/javascripts/lunr/lunr.stemmer.support.js"></script>
+          
+            
+              
+                <script src="../../../assets/javascripts/lunr/tinyseg.js"></script>
+              
+              
+                <script src="../../../assets/javascripts/lunr/lunr.ja.js"></script>
+              
+            
+          
+          
+        
+      
+      <script>app.initialize({version:"1.1",url:{base:"../../.."}})</script>
+      
+    
+  </body>
+</html>
