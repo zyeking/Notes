@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://zyeking.github.io/Notes/Others/Excel/05 MultipleInsertValue/">
+        <link rel="canonical" href="https://zyeking.github.io/Notes/Others/Excel/02 AutoCreateTimeByMacro/">
       
       
         <meta name="author" content="kingCheung">
@@ -40,7 +40,7 @@
     
     
       
-        <title>5. 将单元格的空值换成目标值 - kingCheung</title>
+        <title>2. 用宏自动创建数据时间 - kingCheung</title>
       
     
     
@@ -87,7 +87,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#5" tabindex="1" class="md-skip">
+      <a href="#2" tabindex="1" class="md-skip">
         跳转至
       </a>
     
@@ -113,7 +113,7 @@
             </span>
             <span class="md-header-nav__topic">
               
-                5. 将单元格的空值换成目标值
+                2. 用宏自动创建数据时间
               
             </span>
           
@@ -861,11 +861,20 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../02 AutoCreateTimeByMacro/" title="2. 用宏自动创建数据时间" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+    <a href="./" title="2. 用宏自动创建数据时间" class="md-nav__link md-nav__link--active">
       2. 用宏自动创建数据时间
     </a>
+    
   </li>
 
         
@@ -897,20 +906,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-    <a href="./" title="5. 将单元格的空值换成目标值" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../05 MultipleInsertValue/" title="5. 将单元格的空值换成目标值" class="md-nav__link">
       5. 将单元格的空值换成目标值
     </a>
-    
   </li>
 
         
@@ -964,16 +964,39 @@
               
                 
                 
-                <h1 id="5">5. 将单元格的空值换成目标值</h1>
-<ol>
-<li>
-<p>选中目标单元格<code>ctrl + G</code> 选择<code>定位条件</code>下的<code>空值</code>（或其他）</p>
-</li>
-<li>
-<p>在输入栏中输入目标值，按<code>crtl + Enter</code>
-<img alt="" src="https://i.loli.net/2020/01/03/FvxSdMAymDuNsW5.jpg" /></p>
-</li>
-</ol>
+                <h1 id="2">2. 用宏自动创建数据时间</h1>
+<div class="codehilite"><pre><span></span><span class="n">Private</span> <span class="n">Sub</span> <span class="nf">Worksheet_Change</span><span class="p">(</span><span class="n">ByVal</span> <span class="n">Target</span> <span class="n">As</span> <span class="n">Range</span><span class="p">)</span>
+<span class="err">&#39;</span><span class="n">______说明</span><span class="err">↓</span><span class="n">___________________________________</span>
+<span class="err">&#39;某列单元格发生变化</span>
+<span class="err">&#39;若变化值不为空，对应列添加变化时间点日期时间</span>
+<span class="err">&#39;若变化值为空，删除对应单元格数据</span>
+<span class="err">&#39;示例为</span><span class="n">A列第2行发生变化</span><span class="err">，对应的</span><span class="n">B列添加或删除日期</span>
+<span class="err">&#39;</span><span class="n">______说明</span><span class="err">↑</span><span class="n">___________________________________</span>
+<span class="n">Application</span><span class="p">.</span><span class="n">ScreenUpdating</span> <span class="o">=</span> <span class="n">False</span> <span class="err">&#39;关闭屏幕刷新</span>
+<span class="n">Dim</span> <span class="n">cA</span><span class="p">,</span> <span class="n">cB</span><span class="p">,</span> <span class="n">startRG</span> <span class="n">As</span> <span class="n">String</span>
+<span class="n">Dim</span> <span class="n">offsetc</span> <span class="n">As</span> <span class="n">Long</span>
+<span class="n">Dim</span> <span class="n">rg</span> <span class="n">As</span> <span class="n">Range</span>
+<span class="err">&#39;</span><span class="n">______设置参数</span><span class="err">↓</span><span class="n">_________________</span>
+<span class="n">cA</span> <span class="o">=</span> <span class="s">&quot;A&quot;</span> <span class="err">&#39;变化区域所在列</span>
+<span class="n">cB</span> <span class="o">=</span> <span class="s">&quot;B&quot;</span> <span class="err">&#39;日期生成列</span>
+<span class="n">startRG</span> <span class="o">=</span> <span class="s">&quot;A1&quot;</span> <span class="err">&#39;变化区域首单元格</span><span class="p">(</span><span class="err">防止改动表头触发事件</span><span class="p">)</span>
+<span class="err">&#39;</span><span class="n">______设置参数</span><span class="err">↑</span><span class="n">_________________</span>
+<span class="n">offsetc</span> <span class="o">=</span> <span class="n">Columns</span><span class="p">(</span><span class="n">cB</span><span class="p">).</span><span class="n">Column</span> <span class="o">-</span> <span class="n">Columns</span><span class="p">(</span><span class="n">cA</span><span class="p">).</span><span class="n">Column</span>
+<span class="n">If</span> <span class="n">Not</span> <span class="n">Application</span><span class="p">.</span><span class="n">Intersect</span><span class="p">(</span><span class="n">Target</span><span class="p">,</span> <span class="n">Columns</span><span class="p">(</span><span class="n">cA</span><span class="p">),</span> <span class="n">Range</span><span class="p">(</span><span class="n">startRG</span><span class="p">,</span> <span class="n">ActiveCell</span><span class="p">.</span><span class="n">SpecialCells</span><span class="p">(</span><span class="n">xlLastCell</span><span class="p">)))</span> <span class="n">Is</span> <span class="n">Nothing</span> <span class="n">Then</span>
+    <span class="n">For</span> <span class="n">Each</span> <span class="n">rg</span> <span class="n">In</span> <span class="n">Intersect</span><span class="p">(</span><span class="n">Target</span><span class="p">,</span> <span class="n">Columns</span><span class="p">(</span><span class="n">cA</span><span class="p">),</span> <span class="n">Range</span><span class="p">(</span><span class="n">startRG</span><span class="p">,</span> <span class="n">ActiveCell</span><span class="p">.</span><span class="n">SpecialCells</span><span class="p">(</span><span class="n">xlLastCell</span><span class="p">)))</span>
+        <span class="n">If</span> <span class="n">rg</span> <span class="o">&lt;&gt;</span> <span class="s">&quot;&quot;</span> <span class="n">Then</span>
+            <span class="n">With</span> <span class="n">rg</span><span class="p">.</span><span class="n">Offset</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">offsetc</span><span class="p">)</span>
+                <span class="p">.</span><span class="n">Value</span> <span class="o">=</span> <span class="n">Now</span>
+                <span class="p">.</span><span class="n">NumberFormatLocal</span> <span class="o">=</span> <span class="s">&quot;yyyy/m/d h:mm:ss</span><span class="p">;</span><span class="s">@&quot;</span>
+            <span class="n">End</span> <span class="n">With</span>
+        <span class="n">Else</span>
+            <span class="n">rg</span><span class="p">.</span><span class="n">Offset</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">offsetc</span><span class="p">).</span><span class="n">Clear</span>
+        <span class="n">End</span> <span class="n">If</span>
+    <span class="n">Next</span> <span class="n">rg</span>
+<span class="n">End</span> <span class="n">If</span>
+<span class="n">Application</span><span class="p">.</span><span class="n">ScreenUpdating</span> <span class="o">=</span> <span class="n">True</span> <span class="err">&#39;恢复屏幕刷新</span>
+<span class="n">End</span> <span class="n">Sub</span>
+</pre></div>
                 
                   
                 
@@ -995,7 +1018,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../04 RepairArrowKey/" title="4. 方向键无法控制excel表格上下、左右移动" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../01 AutoCreateTime/" title="1. 自动创建数据时间，不受其他修改影响的`NOW()`" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -1004,19 +1027,19 @@
                 <span class="md-footer-nav__direction">
                   上一页
                 </span>
-                4. 方向键无法控制excel表格上下、左右移动
+                	1. 自动创建数据时间，不受其他修改影响的`NOW()`
               </span>
             </div>
           </a>
         
         
-          <a href="../../01 MySql/" title="使用Mysql" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../03 FormatUnit/" title="3. 为单元格添加格式" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   下一页
                 </span>
-                使用Mysql
+                3. 为单元格添加格式
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

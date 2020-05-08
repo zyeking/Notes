@@ -1,4 +1,4 @@
-# [Docker-Compose快速入门](https://www.runoob.com/docker/docker-compose.html)
+# Docker-Compose快速入门
 
 
 
@@ -48,7 +48,7 @@ def hello():
     return 'Hello World! I have been seen {} times.\n'.format(count)
 ```
 
-创建`composetest/requirements.txt`文件指定库
+创建`composetest/requirements.txt`文件
 
 ```plaintext
 flask
@@ -82,7 +82,7 @@ CMD [ "flask", "run" ]
 
 ```yaml
 # yaml 配置
-# 指本yml已从的compose版本
+# compose版本
 version: '3'
 services:
   web:
@@ -180,3 +180,8 @@ environment:
   SHOW: 'true'
 ```
 
+
+
+Ref:
+
+[docker-compose快速入门](https://www.runoob.com/docker/docker-compose.html)

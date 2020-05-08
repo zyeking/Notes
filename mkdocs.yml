@@ -54,6 +54,8 @@ nav:
   - Docker:
     - ./Docker/01 ChangeImageSource.md
     - ./Docker/02 EntryPointAndCMD.md
+    - ./Docker/03 Docker-Compose.md
+    - ./Docker/04 使用Docker搭建Go开发环境.md
   - Others:
     - Excel:
       - ./Others/Excel/01 AutoCreateTime.md
