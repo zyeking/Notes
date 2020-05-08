@@ -100,7 +100,7 @@ services:
 
 使用Compose命令运行`docker-compose up -d`
 
-
+![](https://i.loli.net/2020/05/08/MLIDkNvBcaAzb7T.png)
 
 ## yml配置
 
@@ -152,11 +152,20 @@ services:
 
 
 
-设备映射列表
+挂载 
 
 ```yaml
-device: 
-  - "/data/docker-mysql:/var/lib/mysql"
+version: '3'
+services:
+  app:
+    image: golang:latest
+    volumes:
+      # 将项目代码根目录映射到容器中的相关目录
+      - $PWD: /go/src/example/demo
+    ports:
+      - "8000:8000"
+    # 执行go run
+    command: go run /go/src/example/demo/main.go
 ```
 
 
