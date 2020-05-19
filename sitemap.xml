@@ -2,172 +2,177 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
      <loc>https://zyeking.github.io/Notes/</loc>
-     <lastmod>2020-05-18</lastmod>
+     <lastmod>2020-05-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://zyeking.github.io/Notes/Golang/Basic/01 Channel/</loc>
-     <lastmod>2020-05-18</lastmod>
+     <lastmod>2020-05-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://zyeking.github.io/Notes/Golang/Basic/02 UseDelveDebug/</loc>
-     <lastmod>2020-05-18</lastmod>
+     <lastmod>2020-05-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://zyeking.github.io/Notes/Golang/Project/go-gin-example/01 Config/</loc>
-     <lastmod>2020-05-18</lastmod>
+     <lastmod>2020-05-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://zyeking.github.io/Notes/Golang/Project/go-gin-example/02 API-1/</loc>
-     <lastmod>2020-05-18</lastmod>
+     <lastmod>2020-05-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://zyeking.github.io/Notes/Golang/Project/go-gin-example/03 API-2/</loc>
-     <lastmod>2020-05-18</lastmod>
+     <lastmod>2020-05-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://zyeking.github.io/Notes/Golang/Project/go-gin-example/04 API-3/</loc>
-     <lastmod>2020-05-18</lastmod>
+     <lastmod>2020-05-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://zyeking.github.io/Notes/Golang/Project/go-gin-example/05 JWT/</loc>
-     <lastmod>2020-05-18</lastmod>
+     <lastmod>2020-05-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://zyeking.github.io/Notes/Golang/Project/go-gin-example/08 Swagger/</loc>
-     <lastmod>2020-05-18</lastmod>
+     <lastmod>2020-05-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://zyeking.github.io/Notes/Golang/Project/go-gin-example/09 Docker/</loc>
-     <lastmod>2020-05-18</lastmod>
+     <lastmod>2020-05-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://zyeking.github.io/Notes/Golang/Project/go-gin-example/10 GORM-Callback/</loc>
-     <lastmod>2020-05-18</lastmod>
+     <lastmod>2020-05-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://zyeking.github.io/Notes/Golang/Project/go-gin-example/FlowChart/</loc>
-     <lastmod>2020-05-18</lastmod>
+     <lastmod>2020-05-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://zyeking.github.io/Notes/Golang/Project/go-gin-example/InterfaceTestInstance/</loc>
-     <lastmod>2020-05-18</lastmod>
+     <lastmod>2020-05-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://zyeking.github.io/Notes/Golang/Go-Web/01 HTTPServe/</loc>
-     <lastmod>2020-05-18</lastmod>
+     <lastmod>2020-05-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://zyeking.github.io/Notes/Golang/Go-Web/02 BasicTemplateUsage/</loc>
-     <lastmod>2020-05-18</lastmod>
+     <lastmod>2020-05-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://zyeking.github.io/Notes/Golang/Go-Web/03 AdvanceTemplateUsage/</loc>
-     <lastmod>2020-05-18</lastmod>
+     <lastmod>2020-05-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://zyeking.github.io/Notes/Golang/ErrorCollect/20191127：Cannot fint main module[gomod]/</loc>
-     <lastmod>2020-05-18</lastmod>
+     <lastmod>2020-05-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://zyeking.github.io/Notes/Python/01 UsingTesseract/</loc>
-     <lastmod>2020-05-18</lastmod>
+     <lastmod>2020-05-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://zyeking.github.io/Notes/Python/02 dzdianpingSpider/</loc>
-     <lastmod>2020-05-18</lastmod>
+     <lastmod>2020-05-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://zyeking.github.io/Notes/Linux/01 FormattingUdisk/</loc>
-     <lastmod>2020-05-18</lastmod>
+     <lastmod>2020-05-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://zyeking.github.io/Notes/Linux/02 ChangeSources/</loc>
-     <lastmod>2020-05-18</lastmod>
+     <lastmod>2020-05-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://zyeking.github.io/Notes/Linux/01 Hello Manjaro/</loc>
-     <lastmod>2020-05-18</lastmod>
+     <loc>https://zyeking.github.io/Notes/Linux/03 Linux安装Golang/</loc>
+     <lastmod>2020-05-19</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://zyeking.github.io/Notes/Linux/0n Hello Manjaro/</loc>
+     <lastmod>2020-05-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://zyeking.github.io/Notes/Docker/01 ChangeImageSource/</loc>
-     <lastmod>2020-05-18</lastmod>
+     <lastmod>2020-05-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://zyeking.github.io/Notes/Docker/02 EntryPointAndCMD/</loc>
-     <lastmod>2020-05-18</lastmod>
+     <lastmod>2020-05-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://zyeking.github.io/Notes/Docker/03 Docker-Compose/</loc>
-     <lastmod>2020-05-18</lastmod>
+     <lastmod>2020-05-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://zyeking.github.io/Notes/Docker/04 使用Docker搭建Go开发环境/</loc>
-     <lastmod>2020-05-18</lastmod>
+     <lastmod>2020-05-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://zyeking.github.io/Notes/Nginx/01 openstry/</loc>
-     <lastmod>2020-05-18</lastmod>
+     <lastmod>2020-05-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://zyeking.github.io/Notes/Nginx/02 将Go应用部署在Nginx上/</loc>
-     <lastmod>2020-05-18</lastmod>
+     <lastmod>2020-05-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://zyeking.github.io/Notes/Others/Excel/01 AutoCreateTime/</loc>
-     <lastmod>2020-05-18</lastmod>
+     <lastmod>2020-05-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://zyeking.github.io/Notes/Others/Excel/02 AutoCreateTimeByMacro/</loc>
-     <lastmod>2020-05-18</lastmod>
+     <lastmod>2020-05-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://zyeking.github.io/Notes/Others/Excel/03 FormatUnit/</loc>
-     <lastmod>2020-05-18</lastmod>
+     <lastmod>2020-05-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://zyeking.github.io/Notes/Others/Excel/04 RepairArrowKey/</loc>
-     <lastmod>2020-05-18</lastmod>
+     <lastmod>2020-05-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://zyeking.github.io/Notes/Others/Excel/05 MultipleInsertValue/</loc>
-     <lastmod>2020-05-18</lastmod>
+     <lastmod>2020-05-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://zyeking.github.io/Notes/Others/01 MySql/</loc>
-     <lastmod>2020-05-18</lastmod>
+     <lastmod>2020-05-19</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>
