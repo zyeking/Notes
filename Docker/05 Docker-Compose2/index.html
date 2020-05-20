@@ -40,7 +40,7 @@
     
     
       
-        <title>05 Docker Compose2 - kingCheung</title>
+        <title>Docker-Compose 2 - kingCheung</title>
       
     
     
@@ -87,7 +87,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#1ip" tabindex="1" class="md-skip">
+      <a href="#docker-compose-2" tabindex="1" class="md-skip">
         跳转至
       </a>
     
@@ -113,7 +113,7 @@
             </span>
             <span class="md-header-nav__topic">
               
-                05 Docker Compose2
+                Docker-Compose 2
               
             </span>
           
@@ -836,18 +836,22 @@
     
     <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
     
+      
+    
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        05 Docker Compose2
+        Docker-Compose 2
       </label>
     
-    <a href="./" title="05 Docker Compose2" class="md-nav__link md-nav__link--active">
-      05 Docker Compose2
+    <a href="./" title="Docker-Compose 2" class="md-nav__link md-nav__link--active">
+      Docker-Compose 2
     </a>
     
       
 <nav class="md-nav md-nav--secondary">
   
+  
+    
   
   
     <label class="md-nav__title" for="__toc">目录</label>
@@ -862,14 +866,14 @@
       
         <li class="md-nav__item">
   <a href="#2-link" class="md-nav__link">
-    实例2：通过--link映射容器域名
+    示例2：通过--link映射容器域名
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#3docker-compose" class="md-nav__link">
-    实例3：docker-compose
+    示例3：docker-compose
   </a>
   
 </li>
@@ -1084,6 +1088,8 @@
 <nav class="md-nav md-nav--secondary">
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">目录</label>
     <ul class="md-nav__list" data-md-scrollfix>
@@ -1097,14 +1103,14 @@
       
         <li class="md-nav__item">
   <a href="#2-link" class="md-nav__link">
-    实例2：通过--link映射容器域名
+    示例2：通过--link映射容器域名
   </a>
   
 </li>
       
         <li class="md-nav__item">
   <a href="#3docker-compose" class="md-nav__link">
-    实例3：docker-compose
+    示例3：docker-compose
   </a>
   
 </li>
@@ -1126,9 +1132,8 @@
               
                 
                 
-                  <h1>05 Docker Compose2</h1>
-                
-                <p>宿主机安装docker后生成docker网卡</p>
+                <h1 id="docker-compose-2">Docker-Compose 2</h1>
+<p>宿主机安装docker后生成docker网卡</p>
 <p>docker网卡通过nat为容器分配ip</p>
 <p>容器件通过ip直接通信(同一网段，访问相关端口）</p>
 <p>容器和宿主机器通过网卡转发路由进行通信</p>
@@ -1143,12 +1148,12 @@
 <p><code>apk add curl</code>安装curl</p>
 <p><code>curl 172.17.0.2</code>访问nginx</p>
 <p><img alt="image-20200512184737407" src="https://i.loli.net/2020/05/12/yJOoHQaVxbNrgFK.png" /></p>
-<h2 id="2-link">实例2：通过--link映射容器域名</h2>
+<h2 id="2-link">示例2：通过--link映射容器域名</h2>
 <p><code>docker run -dit --link mynginx:myng alpine</code>通过<code>--link</code>将<code>mynginx</code>的==域名==映射到容器中的<code>myng</code>，通过curl访问<code>myng</code></p>
 <p><img alt="" src="https://i.loli.net/2020/05/12/KTp3gnHzdRiXWqL.png" /></p>
 <p><code>cat /ect/hosts</code>查看host文件可以看到<code>mynginx</code>映射到了<code>172.17.0.2</code></p>
 <p><img alt="" src="https://i.loli.net/2020/05/12/WyIeuctd52bGDQJ.png" /></p>
-<h2 id="3docker-compose">实例3：docker-compose</h2>
+<h2 id="3docker-compose">示例3：docker-compose</h2>
 <blockquote>
 <p>假如有nginx、golang和mysql三个服务则需要多个<code>--link</code>将各个容器给连接起来，其中创建顺序是mysql、golang、nginx，因为后面的容器都需要用到前面容器，需要先将前面容器给连接🔗起来。</p>
 </blockquote>

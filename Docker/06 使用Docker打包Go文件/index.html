@@ -831,8 +831,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../05 Docker-Compose2/" title="05 Docker Compose2" class="md-nav__link">
-      05 Docker Compose2
+    <a href="../05 Docker-Compose2/" title="Docker-Compose 2" class="md-nav__link">
+      Docker-Compose 2
     </a>
   </li>
 
@@ -1245,6 +1245,8 @@ ENRTYPOINT<span class="o">[</span><span class="s2">&quot;/app&quot;</span><span 
 <span class="k">COPY</span> ./public /public
 <span class="k">COPY</span> ./views /views
 <span class="k">COPY</span> ./logs /logs
+<span class="k">COPY</span> ./locales /locales
+<span class="k">COPY</span> config.json /
 
 <span class="c"># 从builder镜像中把/dist/app 拷贝到当前目录</span>
 <span class="k">COPY</span> --from<span class="o">=</span>builder /build/chitchat /
@@ -1254,12 +1256,16 @@ ENRTYPOINT<span class="o">[</span><span class="s2">&quot;/app&quot;</span><span 
 </pre></div>
 
 <p>启动Mysql服务</p>
-<div class="codehilite"><pre><span></span>docker run --name mysql -p <span class="m">3306</span>:3306 -e <span class="nv">MYSQL_ROOT_PASSWORD</span><span class="o">=</span>root -v /c/user/king/desktop/data:/var/lib/mysql -d mysql:8.0.19
+<div class="codehilite"><pre><span></span>docker run --name mysql -p <span class="m">3306</span>:3306 -e <span class="nv">MYSQL_ROOT_PASSWORD</span><span class="o">=</span>root -v /c/user/king/desktop/data:/var/lib/mysql -d mysql
 </pre></div>
 
 <p>关联：通过<code>--link</code></p>
 <div class="codehilite"><pre><span></span>docker run --link<span class="o">=</span>mysql:mysql -p <span class="m">8080</span>:8080 chitchat
 </pre></div>
+
+<p>ref:</p>
+<p><a href="https://mp.weixin.qq.com/s?__biz=MzAxMTA4Njc0OQ==&amp;mid=2651439635&amp;idx=2&amp;sn=6e5c1fb9092bc31dbe27cd820e748c68&amp;chksm=80bb1ce1b7cc95f71b8e39fe739ff8ba1d36c69f451d61e8761565254550d19e6ce428744868&amp;xtrack=1&amp;scene=0&amp;subscene=91&amp;sessionid=1589957155&amp;clicktime=1589957158&amp;enterid=1589957158&amp;ascene=7&amp;devicetype=android-28&amp;version=27000e37&amp;nettype=3gnet&amp;abtest_cookie=AAACAA%3D%3D&amp;lang=zh_CN&amp;exportkey=AWZkGmCTzpgKsyE18fkD9R8%3D&amp;pass_ticket=eKKl2viZkquy4K%2Bm2JwzcrW4PgOipg%2B5aozQrzBCdH%2BvhTicSdBb3rzBtPRWzgyT&amp;wx_header=1">3步构建go docker最小镜像</a></p>
+<p><a href="https://www.liwenzhou.com/posts/Go/how_to_deploy_go_app_using_docker/">如何使用Docker部署Go Web应用</a></p>
                 
                   
                 
@@ -1281,7 +1287,7 @@ ENRTYPOINT<span class="o">[</span><span class="s2">&quot;/app&quot;</span><span 
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../05 Docker-Compose2/" title="05 Docker Compose2" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../05 Docker-Compose2/" title="Docker-Compose 2" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -1290,7 +1296,7 @@ ENRTYPOINT<span class="o">[</span><span class="s2">&quot;/app&quot;</span><span 
                 <span class="md-footer-nav__direction">
                   上一页
                 </span>
-                05 Docker Compose2
+                Docker-Compose 2
               </span>
             </div>
           </a>
