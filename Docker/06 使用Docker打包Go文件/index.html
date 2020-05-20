@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://zyeking.github.io/Notes/Docker/04 使用Docker搭建Go开发环境/">
+        <link rel="canonical" href="https://zyeking.github.io/Notes/Docker/06 使用Docker打包Go文件/">
       
       
         <meta name="author" content="kingCheung">
@@ -40,7 +40,7 @@
     
     
       
-        <title>使用Docker搭建Go开发环境 - kingCheung</title>
+        <title>使用Docker打包Go文件 - kingCheung</title>
       
     
     
@@ -113,7 +113,7 @@
             </span>
             <span class="md-header-nav__topic">
               
-                使用Docker搭建Go开发环境
+                使用Docker打包Go文件
               
             </span>
           
@@ -817,56 +817,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        使用Docker搭建Go开发环境
-      </label>
-    
-    <a href="./" title="使用Docker搭建Go开发环境" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="../04 使用Docker搭建Go开发环境/" title="使用Docker搭建Go开发环境" class="md-nav__link">
       使用Docker搭建Go开发环境
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">目录</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    基本使用
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#docker-compose" class="md-nav__link">
-    使用docker-compose
-  </a>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -886,11 +841,63 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="../06 使用Docker打包Go文件/" title="使用Docker打包Go文件" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        使用Docker打包Go文件
+      </label>
+    
+    <a href="./" title="使用Docker打包Go文件" class="md-nav__link md-nav__link--active">
       使用Docker打包Go文件
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#dockerfile" class="md-nav__link">
+    Dockerfile
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    分段构建
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    打包项目
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -1088,15 +1095,22 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#_1" class="md-nav__link">
-    基本使用
+  <a href="#dockerfile" class="md-nav__link">
+    Dockerfile
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#docker-compose" class="md-nav__link">
-    使用docker-compose
+  <a href="#_1" class="md-nav__link">
+    分段构建
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    打包项目
   </a>
   
 </li>
@@ -1118,57 +1132,134 @@
               
                 
                 
-                <h1 id="dockergo">使用Docker搭建Go开发环境</h1>
-<h2 id="_1">基本使用</h2>
-<ol>
-<li>
-<p>拉取Golang镜像<code>docker pull golang</code></p>
-</li>
-<li>
-<p>运行容器<code>docker run --rm -it -name go-demo golang bash</code>进入到bash中</p>
-</li>
-<li>
-<p>设置goproxy<code>go env -w GOPROXY=https://goproxy.io,direct</code></p>
-</li>
-<li>设置gomodule<code>export GO111MODULE=on</code></li>
-</ol>
-<p><img alt="image-20200508161732265" src="https://i.loli.net/2020/05/08/okJGuSX3mNDOARP.png" /></p>
-<ol>
-<li>在容器中运行go项目</li>
-</ol>
-<div class="codehilite"><pre><span></span>docker run --rm -it --name go-demo <span class="se">\</span>
- -v <span class="nv">$PWD</span>: /go/src/example/go-demo <span class="se">\</span>
- -p <span class="m">8000</span>:8000
- golang
+                <h1 id="dockergo">使用Docker打包Go文件</h1>
+<h2 id="dockerfile">Dockerfile</h2>
+<div class="codehilite"><pre><span></span><span class="k">FROM</span><span class="s"> golang:alpine</span>
+
+<span class="c"># 为我们的镜像设置必要的环境变量</span>
+<span class="k">ENV</span> <span class="nv">GO111MODULE</span><span class="o">=</span>on <span class="se">\</span>
+    <span class="nv">CGO_ENABLED</span><span class="o">=</span><span class="m">0</span> <span class="se">\</span>
+    <span class="nv">GOOS</span><span class="o">=</span>linux <span class="se">\</span>
+    <span class="nv">GOARCH</span><span class="o">=</span>amd64 <span class="se">\</span>
+    <span class="nv">GOPROXY</span><span class="o">=</span>https://goproxy.io,direct
+
+<span class="c"># 移动到工作目录：/build</span>
+<span class="k">WORKDIR</span><span class="s"> /build</span>
+
+<span class="c"># 将代码复制到容器中</span>
+<span class="k">COPY</span> . .
+
+<span class="c"># 将我们的代码编译成二进制可执行文件app</span>
+<span class="k">RUN</span> go build -o app .
+
+<span class="c"># 移动到用于存放生成的二进制文件的 /dist 目录</span>
+<span class="k">WORKDIR</span><span class="s"> /dist</span>
+
+<span class="c"># 将二进制文件从 /build 目录复制到这里</span>
+<span class="k">RUN</span> cp /build/app .
+
+<span class="c"># 声明服务端口</span>
+<span class="k">EXPOSE</span><span class="s"> 8888</span>
+
+<span class="c"># 启动容器时运行的命令，启动app</span>
+<span class="k">CMD</span> <span class="p">[</span><span class="s2">&quot;/dist/app&quot;</span><span class="p">]</span>
 </pre></div>
 
-<p>通过<code>-v</code>将本地目录/数据挂载到容器中，<code>-p</code>指定主机和容器的端口映射。</p>
-<p>切换到bash会话中运行<code>go run go/src/example/go-demo</code></p>
 <blockquote>
-<p><code>$PWD</code>目录表示当前目录，只能够在Linux下使用，在Windows下需要在Docker for Windows中设置挂载<img alt="" src="https://i.loli.net/2020/05/20/UjZ7rPFvqykYoVd.png" /></p>
-<p>之后通过<code>/c/...</code>指定目录。</p>
+<p>通过<code>docker build . -t &lt;CONTAINER_NAME&gt;</code>指令根据<code>Dockerfile</code>配置创建出相应的镜像，构建完毕后通过<code>docker run -p 8000：8888 &lt;CONTAINER_NAME&gt;</code>运行镜像</p>
 </blockquote>
-<h2 id="docker-compose">使用docker-compose</h2>
-<p>在项目代码跟目录创建<code>docker-compose.yml</code></p>
-<div class="codehilite"><pre><span></span><span class="nt">version</span><span class="p">:</span> <span class="s">&#39;3&#39;</span>
-<span class="nt">services</span><span class="p">:</span>
-  <span class="nt">app</span><span class="p">:</span>
-    <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">golang:latest</span>
-    <span class="nt">volumes</span><span class="p">:</span>
-      <span class="c1"># 将项目代码根目录映射到容器中的相关目录</span>
-      <span class="p p-Indicator">-</span> <span class="nt">$PWD</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/go/src/example/demo</span>
-      <span class="c1"># - /c/users/king/desktop/test:/go/src/example</span>
-    <span class="nt">ports</span><span class="p">:</span>
-      <span class="p p-Indicator">-</span> <span class="s">&quot;8000:8000&quot;</span>
-    <span class="c1"># 执行go run</span>
-    <span class="nt">command</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">go run /go/src/example/demo/main.go</span>
+<h2 id="_1">分段构建</h2>
+<p>因为Go程序编译后会得到可执行的二进制文件，所以可以创建一个能够运行最终的二进制文件的容器来运行app。这样的好处是镜像只保存了二进制文件从而使得镜像大小减小。</p>
+<div class="codehilite"><pre><span></span><span class="k">FROM</span><span class="s"> golang:alpine AS builder</span>
+
+<span class="c"># 为我们的镜像设置必要的环境变量</span>
+<span class="k">ENV</span> <span class="nv">GO111MODULE</span><span class="o">=</span>on <span class="se">\</span>
+    <span class="nv">CGO_ENABLED</span><span class="o">=</span><span class="m">0</span> <span class="se">\</span>
+    <span class="nv">GOOS</span><span class="o">=</span>linux <span class="se">\</span>
+    <span class="nv">GOARCH</span><span class="o">=</span>amd64 <span class="se">\</span>
+    <span class="nv">GOPROXY</span><span class="o">=</span>https://goproxy.io,direct
+
+<span class="c"># 移动到工作目录：/build</span>
+<span class="k">WORKDIR</span><span class="s"> /build</span>
+
+<span class="c"># 将代码复制到容器中</span>
+<span class="k">COPY</span> . .
+
+<span class="c"># 创建一个小的镜像存放二进制文件</span>
+<span class="k">FROM</span><span class="s"> scratch</span>
+
+<span class="c"># 将builder镜像中的/dist/app拷贝到当前目录</span>
+<span class="k">COPY</span> --from<span class="o">=</span>builder /build/app /
+
+<span class="c"># 运行</span>
+ENRTYPOINT<span class="o">[</span><span class="s2">&quot;/app&quot;</span><span class="o">]</span>
 </pre></div>
 
-<ul>
-<li>启动docker-compose并且：<code>docker-compose up -d</code></li>
-<li>修改代码，重新编译项目：<code>docker-compose restart</code></li>
-<li>进入容器中执行命令：<code>docker-compose exec &lt;container name&gt; bash</code>，例如<code>docker-compose exec app go test</code></li>
-</ul>
+<h2 id="_2">打包项目</h2>
+<div class="codehilite"><pre><span></span>chitchat
+├─config
+├─data
+├─handlers
+├─locales
+├─logs
+├─models
+├─public
+│  ├─css
+│  ├─fonts
+│  └─js
+├─routes
+└─views
+    ├─en
+    └─zh
+</pre></div>
+
+<ol>
+<li>将静态文件拷贝到最终的镜像中</li>
+</ol>
+<div class="codehilite"><pre><span></span><span class="k">FROM</span><span class="s"> golang:alpine AS builder</span>
+
+<span class="c"># 为我们的镜像设置必要的环境变量</span>
+<span class="k">ENV</span> <span class="nv">GO111MODULE</span><span class="o">=</span>on <span class="se">\</span>
+    <span class="nv">CGO_ENABLED</span><span class="o">=</span><span class="m">0</span> <span class="se">\</span>
+    <span class="nv">GOOS</span><span class="o">=</span>linux <span class="se">\</span>
+    <span class="nv">GOARCH</span><span class="o">=</span>amd64 <span class="se">\</span>
+    <span class="nv">GOPROXY</span><span class="o">=</span>https://goproxy.io,direct
+
+<span class="c"># 移动到工作目录：/build</span>
+<span class="k">WORKDIR</span><span class="s"> /build</span>
+
+<span class="c"># 复制项目中的 go.mod 和 go.sum文件并下载依赖信息</span>
+<span class="k">COPY</span> go.mod .
+<span class="k">COPY</span> go.sum .
+<span class="k">RUN</span> go mod download
+
+<span class="c"># 将代码复制到容器中</span>
+<span class="k">COPY</span> . .
+
+<span class="c"># 将我们的代码编译成二进制可执行文件 chitchat</span>
+<span class="k">RUN</span> go build -o chitchat .
+
+<span class="c"># 接下来创建一个小镜像</span>
+<span class="k">FROM</span><span class="s"> scratch</span>
+
+<span class="k">COPY</span> ./public /public
+<span class="k">COPY</span> ./views /views
+<span class="k">COPY</span> ./logs /logs
+
+<span class="c"># 从builder镜像中把/dist/app 拷贝到当前目录</span>
+<span class="k">COPY</span> --from<span class="o">=</span>builder /build/chitchat /
+
+<span class="c"># 需要运行的命令</span>
+<span class="k">ENTRYPOINT</span> <span class="p">[</span><span class="s2">&quot;/chitchat&quot;</span><span class="p">]</span>
+</pre></div>
+
+<p>启动Mysql服务</p>
+<div class="codehilite"><pre><span></span>docker run --name mysql -p <span class="m">3306</span>:3306 -e <span class="nv">MYSQL_ROOT_PASSWORD</span><span class="o">=</span>root -v /c/user/king/desktop/data:/var/lib/mysql -d mysql:8.0.19
+</pre></div>
+
+<p>关联：通过<code>--link</code></p>
+<div class="codehilite"><pre><span></span>docker run --link<span class="o">=</span>mysql:mysql -p <span class="m">8080</span>:8080 chitchat
+</pre></div>
                 
                   
                 
@@ -1190,7 +1281,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../03 Docker-Compose/" title="Docker-Compose快速入门" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../05 Docker-Compose2/" title="05 Docker Compose2" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -1199,19 +1290,19 @@
                 <span class="md-footer-nav__direction">
                   上一页
                 </span>
-                Docker-Compose快速入门
+                05 Docker Compose2
               </span>
             </div>
           </a>
         
         
-          <a href="../05 Docker-Compose2/" title="05 Docker Compose2" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../../Nginx/01 openstry/" title="01 openstry" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   下一页
                 </span>
-                05 Docker Compose2
+                01 openstry
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

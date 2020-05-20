@@ -11,7 +11,7 @@
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
       
-        <link rel="canonical" href="https://zyeking.github.io/Notes/Docker/05/">
+        <link rel="canonical" href="https://zyeking.github.io/Notes/Docker/05 Docker-Compose2/">
       
       
         <meta name="author" content="kingCheung">
@@ -40,7 +40,7 @@
     
     
       
-        <title>05 - kingCheung</title>
+        <title>05 Docker Compose2 - kingCheung</title>
       
     
     
@@ -113,7 +113,7 @@
             </span>
             <span class="md-header-nav__topic">
               
-                05
+                05 Docker Compose2
               
             </span>
           
@@ -159,14 +159,16 @@
       
         
 
-<nav class="md-tabs" data-md-component="tabs">
+  
+
+<nav class="md-tabs md-tabs--active" data-md-component="tabs">
   <div class="md-tabs__inner md-grid">
     <ul class="md-tabs__list">
       
         
   <li class="md-tabs__item">
     
-      <a href="../.." class="md-tabs__link md-tabs__link--active">
+      <a href="../.." class="md-tabs__link">
         index
       </a>
     
@@ -223,7 +225,7 @@
   
     <li class="md-tabs__item">
       
-        <a href="../01 ChangeImageSource/" class="md-tabs__link">
+        <a href="../01 ChangeImageSource/" class="md-tabs__link md-tabs__link--active">
           Docker
         </a>
       
@@ -707,8 +709,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Linux/01 FormattingUdisk/" title="Linux01: 彻底格式化U盘" class="md-nav__link">
-      Linux01: 彻底格式化U盘
+    <a href="../../Linux/01 FormattingUdisk/" title="01: 彻底格式化U盘" class="md-nav__link">
+      01: 彻底格式化U盘
     </a>
   </li>
 
@@ -719,8 +721,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Linux/02 ChangeSources/" title="Linux02: 更改Ubuntu源" class="md-nav__link">
-      Linux02: 更改Ubuntu源
+    <a href="../../Linux/02 ChangeSources/" title="02: 更改Ubuntu源" class="md-nav__link">
+      02: 更改Ubuntu源
     </a>
   </li>
 
@@ -758,10 +760,12 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
     
     <label class="md-nav__link" for="nav-5">
       Docker
@@ -817,6 +821,78 @@
   <li class="md-nav__item">
     <a href="../04 使用Docker搭建Go开发环境/" title="使用Docker搭建Go开发环境" class="md-nav__link">
       使用Docker搭建Go开发环境
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        05 Docker Compose2
+      </label>
+    
+    <a href="./" title="05 Docker Compose2" class="md-nav__link md-nav__link--active">
+      05 Docker Compose2
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">目录</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#1ip" class="md-nav__link">
+    示例1：ip访问
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-link" class="md-nav__link">
+    实例2：通过--link映射容器域名
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3docker-compose" class="md-nav__link">
+    实例3：docker-compose
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../06 使用Docker打包Go文件/" title="使用Docker打包Go文件" class="md-nav__link">
+      使用Docker打包Go文件
     </a>
   </li>
 
@@ -1050,7 +1126,7 @@
               
                 
                 
-                  <h1>05</h1>
+                  <h1>05 Docker Compose2</h1>
                 
                 <p>宿主机安装docker后生成docker网卡</p>
 <p>docker网卡通过nat为容器分配ip</p>
@@ -1095,6 +1171,41 @@
       
         
 <footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../04 使用Docker搭建Go开发环境/" title="使用Docker搭建Go开发环境" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  上一页
+                </span>
+                使用Docker搭建Go开发环境
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../06 使用Docker打包Go文件/" title="使用Docker打包Go文件" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  下一页
+                </span>
+                使用Docker打包Go文件
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
