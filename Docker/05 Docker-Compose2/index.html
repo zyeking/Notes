@@ -362,6 +362,18 @@
   </li>
 
         
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Golang/Basic/03 ArrayAndSlice.md" title="None" class="md-nav__link">
+      None
+    </a>
+  </li>
+
+        
       </ul>
     </nav>
   </li>
@@ -1158,7 +1170,36 @@
 <p>假如有nginx、golang和mysql三个服务则需要多个<code>--link</code>将各个容器给连接起来，其中创建顺序是mysql、golang、nginx，因为后面的容器都需要用到前面容器，需要先将前面容器给连接🔗起来。</p>
 </blockquote>
 <p><img alt="" src="https://i.loli.net/2020/05/12/uqvbgcGjA3o8hkE.png" /></p>
-<p>通过配置文件统一配置：<code>docker-compose</code></p>
+<p>通过配置文件统一配置：<code>docker-compose.yml</code></p>
+<div class="codehilite"><pre><span></span><span class="l l-Scalar l-Scalar-Plain">version &#39;3&#39;</span>
+<span class="l l-Scalar l-Scalar-Plain">service</span><span class="p p-Indicator">:</span>
+    <span class="nt">nginx</span><span class="p">:</span>
+      <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">nginx:apline</span>
+    <span class="nt">ports</span><span class="p">:</span>
+      <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">80:80</span>
+      <span class="nt">volumes</span><span class="p">:</span>
+    <span class="c1"># 将本地文件映射到内部的/html下</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">/root/html:/usr/share/nginx/html</span>
+    <span class="c1"># 映射配置文件</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">/root/conf/nginx.conf:/etc/nginx/nginx.conf</span>
+    <span class="nt">golang</span><span class="p">:</span>
+    <span class="c1">#  build:</span>
+    <span class="c1">#  context: ./</span>
+    <span class="c1">#  dockerfile: web.dockerfile   </span>
+      <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">golang:latest</span>
+       <span class="l l-Scalar l-Scalar-Plain">working_dir</span><span class="p p-Indicator">:</span> <span class="l l-Scalar l-Scalar-Plain">/go/src/example</span>
+       <span class="l l-Scalar l-Scalar-Plain"># 将本地文件映射到工作目录</span>
+    <span class=" -Error"> </span><span class="nt">volumes</span><span class="p">:</span>
+       <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">$PWD:/go/src/example</span>
+       <span class="nt">environment</span><span class="p">:</span>
+       <span class="p p-Indicator">-</span> <span class="s">&quot;GO111MUDOLE=on&quot;</span>
+       <span class="p p-Indicator">-</span> <span class="s">&quot;GOPROXY=https://goproxy.io,direct&quot;</span>
+
+<span class=" -Error">  </span><span class="nt">database</span><span class="p">:</span>
+    <span class="nt">image</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">mysql</span>
+    <span class="nt">environment</span><span class="p">:</span>
+    <span class="p p-Indicator">-</span> <span class="l l-Scalar l-Scalar-Plain">MYSQL_ROOT_PASSWORD=root</span>
+</pre></div>
                 
                   
                 
